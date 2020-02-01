@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_tram"
+        android:title="@string/menu_tram"
+        android:icon="@drawable/tram_menu_item"/>
+
+    <item
+        android:id="@+id/nav_trolley"
+        android:title="@string/menu_trolley"
+        android:icon="@drawable/trolley_menu_item"/>
+
+    <item
+        android:id="@+id/nav_bus"
+        android:title="@string/menu_bus"
+        android:icon="@drawable/bus_menu_item"/>
+
+    <item
+        android:id="@+id/nav_marsh"
+        android:title="@string/menu_marsh"
+        android:icon="@drawable/marsh_menu_item"/>
+
+</menu>

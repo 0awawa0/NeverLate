@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_tram">
+
+    <fragment
+        android:id="@+id/nav_tram"
+        android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
+        android:label="@string/menu_tram"
+        tools:layout="@layout/fragment_routes"/>
+
+    <fragment
+        android:id="@+id/nav_trolley"
+        android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
+        android:label="@string/menu_trolley"
+        tools:layout="@layout/fragment_routes"/>
+
+    <fragment
+        android:id="@+id/nav_bus"
+        android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
+        android:label="@string/menu_bus"
+        tools:layout="@layout/fragment_routes"/>
+
+    <fragment
+        android:id="@+id/nav_marsh"
+        android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
+        android:label="@string/menu_marsh"
+        tools:layout="@layout/fragment_routes"/>
+
+    <fragment
+        android:id="@+id/nav_stops"
+        android:name="com.awawa.neverlate.ui.stops.StopsFragment"
+        android:label="@string/stops"
+        tools:layout="@layout/fragment_stops"/>
+
+</navigation>

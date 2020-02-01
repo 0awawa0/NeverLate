@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#D81B60</color>
+
+    <color name="toolbar_background">#9a24e3</color>
+
+    <color name="home_background">#e6daed</color>
+
+    <color name="gradient_color_one">#fcbe03</color>
+    <color name="gradient_color_two">#a903fc</color>
+    <color name="gradient_color_three">#fc3503</color>
+
+    <color name="colorTram">#fc0303</color>
+    <color name="colorTramBackground">#d1aeaf</color>
+
+    <color name="colorTrolley">#ad1aa1</color>
+    <color name="colorTrolleyBackground">#d1aecf</color>
+
+    <color name="colorBus">#132dad</color>
+    <color name="colorBusBackground">#b0aed1</color>
+
+    <color name="colorMarsh">#37ad13</color>
+    <color name="colorMarshBackground">#b6d1ae</color>
+</resources>

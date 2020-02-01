@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">NeverLate</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">NeverLate</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+
+    <string name="menu_home">Главная</string>
+    <string name="menu_tram">Трамвай</string>
+    <string name="menu_trolley">Троллейбус</string>
+    <string name="menu_bus">Автобус</string>
+    <string name="menu_marsh">Маршрутка</string>
+
+    <string name="stops">Остановки</string>
+
+    <string name="straight_route">Прямой маршрут</string>
+    <string name="reversed_route">Обратный маршрут</string>
+
+    <string name="reading_database">Чтение базы данных…</string>
+</resources>
