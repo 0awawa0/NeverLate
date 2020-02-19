@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.awawa.neverlate.R
-import kotlinx.android.synthetic.main.stop_view.view.*
 
 
 class StopView(
@@ -48,7 +47,7 @@ class StopView(
         }
 
     private val view: LinearLayout = LayoutInflater.from(context)
-        .inflate(R.layout.stop_view, this, false) as LinearLayout
+        .inflate(R.layout.layout_stop_view, this, false) as LinearLayout
     private val tvStopName = view.findViewById<TextView>(R.id.tvStopName)
 
     init { this.addView(view) }
