@@ -9,16 +9,19 @@ import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
+import com.awawa.neverlate.MainActivity
 import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
+import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.*
 
+const val ARGUMENT_ROUTE_ID = "routeId"
 
-class RoutesFragment : Fragment() {
+class RoutesFragment : Fragment(), RVItemClickListener {
 
-    private val adapter: RoutesAdapter = RoutesAdapter()
+    private val adapter: RoutesAdapter = RoutesAdapter(this)
     private val presenter: RoutesPresenter = RoutesPresenter(this)
 
     override fun onCreateView(
@@ -42,5 +45,11 @@ class RoutesFragment : Fragment() {
             adapter.updateRoutes(routes)
             requireActivity().mainLoadingPanel.visibility = GONE
         }
+    }
+
+    override fun onClick(view: View) {
+        val args = Bundle()
+        args.putInt(ARGUMENT_ROUTE_ID, view.id)
+        ((requireActivity() as MainActivity).navController).navigate(R.id.nav_stops, args)
     }
 }

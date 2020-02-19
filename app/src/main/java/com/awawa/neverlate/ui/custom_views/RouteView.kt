@@ -59,31 +59,5 @@ class RouteView(
     private val tvRouteNumber = view.findViewById<TextView>(R.id.tvRouteNumber)
     private val tvRouteName = view.findViewById<TextView>(R.id.tvRouteName)
 
-    init {
-        tvRouteNumber.text = routeNumber
-        tvRouteName.text = routeName
-        when (transportId) {
-            1 -> {
-                tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorTram))
-                view.background = context.resources.getDrawable(R.drawable.tram_route_view_background)
-            }
-
-            2 -> {
-                tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorTrolley))
-                view.background = context.resources.getDrawable(R.drawable.trolley_route_view_background)
-            }
-
-            3 -> {
-                tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorBus))
-                view.background = context.resources.getDrawable(R.drawable.bus_route_view_background)
-            }
-
-            4 -> {
-                tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorMarsh))
-                view.background = context.resources.getDrawable(R.drawable.marsh_route_view_background)
-            }
-        }
-
-        this.addView(view)
-    }
+    init { this.addView(view) }
 }

@@ -15,34 +15,41 @@ class StopView(
     stopName: String
 ) : LinearLayout(context) {
 
+    var stopName = stopName
+        set(value) {
+            field = value
+            tvStopName.text = value
+        }
+
+    var transportId = transportId
+        set(value) {
+            field = value
+            when (value) {
+                1 -> {
+                    view.background =
+                        context.resources.getDrawable(R.drawable.tram_route_view_background)
+                }
+
+                2 -> {
+                    view.background =
+                        context.resources.getDrawable(R.drawable.trolley_route_view_background)
+                }
+
+                3 -> {
+                    view.background =
+                        context.resources.getDrawable(R.drawable.bus_route_view_background)
+                }
+
+                4 -> {
+                    view.background =
+                        context.resources.getDrawable(R.drawable.marsh_route_view_background)
+                }
+            }
+        }
+
     private val view: LinearLayout = LayoutInflater.from(context)
         .inflate(R.layout.stop_view, this, false) as LinearLayout
     private val tvStopName = view.findViewById<TextView>(R.id.tvStopName)
 
-    init {
-        tvStopName.text = stopName
-
-        when (transportId) {
-            1 -> {
-                view.background =
-                    context.resources.getDrawable(R.drawable.tram_route_view_background)
-            }
-
-            2 -> {
-                view.background =
-                    context.resources.getDrawable(R.drawable.trolley_route_view_background)
-            }
-
-            3 -> {
-                view.background =
-                    context.resources.getDrawable(R.drawable.bus_route_view_background)
-            }
-
-            4 -> {
-                view.background =
-                    context.resources.getDrawable(R.drawable.marsh_route_view_background)
-            }
-        }
-        this.addView(view)
-    }
+    init { this.addView(view) }
 }
