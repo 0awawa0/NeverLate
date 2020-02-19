@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import androidx.fragment.app.Fragment
+import com.awawa.neverlate.MainActivity
 import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
@@ -55,7 +56,9 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
 
-    override fun onClick(view: View) {}
+    override fun onClick(view: View) {
+        (requireActivity() as MainActivity).navController.navigate(R.id.nav_times)
+    }
 
 
     suspend fun updateData(stops: List<Entities.Stops>) {

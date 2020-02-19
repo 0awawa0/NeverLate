@@ -19,4 +19,6 @@
     <string name="reversed_route">Обратный маршрут</string>
 
     <string name="reading_database">Чтение базы данных…</string>
+
+    <string name="times">Расписание</string>
 </resources>

@@ -60,4 +60,15 @@
             android:defaultValue="1"/>
     </fragment>
 
+    <fragment
+        android:id="@+id/nav_times"
+        android:name="com.awawa.neverlate.ui.times.TimesFragment"
+        android:label="@string/times"
+        tools:layout="@layout/fragment_times">
+        <argument
+            android:name="stopId"
+            app:argType="integer"
+            android:defaultValue="1"/>
+    </fragment>
+
 </navigation>
