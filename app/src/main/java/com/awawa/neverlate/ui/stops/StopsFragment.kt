@@ -13,6 +13,7 @@ import com.awawa.neverlate.R
 import com.awawa.neverlate.db.DatabaseHelper
 import com.awawa.neverlate.ui.custom_views.StopView
 import com.google.android.material.tabs.TabLayout
+import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -45,7 +46,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener {
                 stopView.setOnClickListener { }
                 llStops.addView(stopView)
             }
-            (activity as MainActivity).loadingPannel.visibility = View.GONE
+            (activity as MainActivity).mainLoadingPanel.visibility = View.GONE
         }
     }
 

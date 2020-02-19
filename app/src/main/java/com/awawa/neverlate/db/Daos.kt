@@ -11,6 +11,9 @@ class Daos {
         @Query("SELECT * FROM routes")
         fun getAll() : List<Entities.Routes>
 
+        @Query("SELECT * FROM routes WHERE TransportID == :id AND Reverse == 0 ORDER BY RouteNumber")
+        fun getRoutes(id: Int): List<Entities.Routes>
+
         @Query("SELECT * FROM routes WHERE TransportID == 1 AND Reverse == 0 ORDER BY RouteNumber")
         fun getAllTramRoutes() : List<Entities.Routes>
 

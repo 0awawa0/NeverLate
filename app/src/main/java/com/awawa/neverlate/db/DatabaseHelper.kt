@@ -3,6 +3,8 @@ package com.awawa.neverlate.db
 import android.content.Context
 import android.util.Log
 import androidx.room.Room
+import androidx.room.migration.Migration
+import androidx.sqlite.db.SupportSQLiteDatabase
 
 class DatabaseHelper() {
 
@@ -31,6 +33,9 @@ class DatabaseHelper() {
         if (!::database.isInitialized){
             database = Room.databaseBuilder(context, Database::class.java, databaseName)
                 .allowMainThreadQueries()
+                .addMigrations(object: Migration(3, 4) {
+                    override fun migrate(database: SupportSQLiteDatabase) {}
+                })
                 .createFromAsset(assetDatabaseFile)
                 .build()
         }

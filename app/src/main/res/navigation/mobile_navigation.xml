@@ -9,25 +9,45 @@
         android:id="@+id/nav_tram"
         android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
         android:label="@string/menu_tram"
-        tools:layout="@layout/fragment_routes"/>
+        tools:layout="@layout/fragment_routes">
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="1"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_trolley"
         android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
         android:label="@string/menu_trolley"
-        tools:layout="@layout/fragment_routes"/>
+        tools:layout="@layout/fragment_routes">
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="2"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_bus"
         android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
         android:label="@string/menu_bus"
-        tools:layout="@layout/fragment_routes"/>
+        tools:layout="@layout/fragment_routes">
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="3"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_marsh"
         android:name="com.awawa.neverlate.ui.routes.RoutesFragment"
         android:label="@string/menu_marsh"
-        tools:layout="@layout/fragment_routes"/>
+        tools:layout="@layout/fragment_routes">
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="4"/>
+    </fragment>
 
     <fragment
         android:id="@+id/nav_stops"
