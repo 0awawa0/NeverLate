@@ -34,12 +34,11 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     ): View? {
 
         val root = inflater.inflate(R.layout.fragment_stops, container, false) as LinearLayout
-        val tabLayout = root.findViewById<TabLayout>(R.id.tabLayout)
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
         root.rvStops.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
         root.rvStops.adapter = adapter
-        tabLayout.addOnTabSelectedListener(this)
+        root.tabLayout.addOnTabSelectedListener(this)
         presenter.getStops(routeId)
         return root
     }

@@ -1,24 +1,26 @@
 package com.awawa.neverlate.ui.custom_views
 
-
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.awawa.neverlate.R
 
+class TimeView(context: Context,
+               time: String,
+               interval: Int,
+               night: Int,
+               transportId: Int): LinearLayout(context) {
 
-class StopView(
-    context: Context,
-    transportId: Int,
-    stopName: String
-) : LinearLayout(context) {
-
-    var stopName = stopName
+    var time = time
         set(value) {
             field = value
-            tvStopName.text = value
+            tvTime.text = value
         }
+
+    var interval = interval
+
+    var night = night
 
     var transportId = transportId
         set(value) {
@@ -47,8 +49,8 @@ class StopView(
         }
 
     private val view: LinearLayout = LayoutInflater.from(context)
-        .inflate(R.layout.layout_stop_view, this, false) as LinearLayout
-    private val tvStopName = view.findViewById<TextView>(R.id.tvStopName)
+        .inflate(R.layout.layout_time_view, this, false) as LinearLayout
+    private val tvTime = view.findViewById<TextView>(R.id.tvTime)
 
     init { this.addView(view) }
 }

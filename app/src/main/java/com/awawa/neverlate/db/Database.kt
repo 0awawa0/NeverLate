@@ -11,4 +11,5 @@ import androidx.room.RoomDatabase
 abstract class Database : RoomDatabase(){
     abstract fun routesDao() : Daos.RouteDao
     abstract fun stopsDao() : Daos.StopDao
+    abstract fun timesDao() : Daos.TimesDao
 }

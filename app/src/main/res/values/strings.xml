@@ -21,4 +21,7 @@
     <string name="reading_database">Чтение базы данных…</string>
 
     <string name="times">Расписание</string>
+
+    <string name="weekdays">Будний день</string>
+    <string name="weekends">Выходной</string>
 </resources>

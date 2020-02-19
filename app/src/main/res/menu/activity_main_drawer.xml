@@ -4,7 +4,7 @@
     <item
         android:id="@+id/nav_tram"
         android:title="@string/menu_tram"
-        android:icon="@drawable/tram_menu_item"/>
+        android:icon="@drawable/menu_item_tram"/>
 
     <item
         android:id="@+id/nav_trolley"
@@ -14,11 +14,11 @@
     <item
         android:id="@+id/nav_bus"
         android:title="@string/menu_bus"
-        android:icon="@drawable/bus_menu_item"/>
+        android:icon="@drawable/menu_item_bus"/>
 
     <item
         android:id="@+id/nav_marsh"
         android:title="@string/menu_marsh"
-        android:icon="@drawable/marsh_menu_item"/>
+        android:icon="@drawable/menu_item_marsh"/>
 
 </menu>

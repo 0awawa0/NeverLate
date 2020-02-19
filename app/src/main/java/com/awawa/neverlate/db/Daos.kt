@@ -35,4 +35,11 @@ class Daos {
         @Query("SELECT * FROM stops WHERE RouteID == :routeId ORDER BY StopNumber")
         suspend fun getAllStops(routeId: Int) : List<Entities.Stops>
     }
+
+
+    @Dao
+    interface TimesDao {
+        @Query("SELECT * FROM times WHERE StopID == :stopId AND Weekend == :weekend ORDER BY _id")
+        suspend fun getStops(stopId: Int, weekend: Boolean): List<Entities.Times>
+    }
 }

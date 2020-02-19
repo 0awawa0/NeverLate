@@ -2,7 +2,6 @@ package com.awawa.neverlate.ui.custom_views
 
 
 import android.content.Context
-import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
@@ -34,22 +33,22 @@ class RouteView(
             when (value) {
                 1 -> {
                     tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorTram))
-                    view.background = context.resources.getDrawable(R.drawable.tram_route_view_background)
+                    view.background = context.resources.getDrawable(R.drawable.background_tram_route_view)
                 }
 
                 2 -> {
                     tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorTrolley))
-                    view.background = context.resources.getDrawable(R.drawable.trolley_route_view_background)
+                    view.background = context.resources.getDrawable(R.drawable.background_trolley_route_view)
                 }
 
                 3 -> {
                     tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorBus))
-                    view.background = context.resources.getDrawable(R.drawable.bus_route_view_background)
+                    view.background = context.resources.getDrawable(R.drawable.background_bus_route_view)
                 }
 
                 4 -> {
                     tvRouteNumber.setTextColor(context.resources.getColor(R.color.colorMarsh))
-                    view.background = context.resources.getDrawable(R.drawable.marsh_route_view_background)
+                    view.background = context.resources.getDrawable(R.drawable.background_marsh_route_view)
                 }
             }
         }
