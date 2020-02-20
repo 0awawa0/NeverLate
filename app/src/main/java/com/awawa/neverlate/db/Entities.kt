@@ -11,7 +11,7 @@ class Entities {
 
     @Entity(tableName = "routes")
     class Routes(
-        @PrimaryKey @NotNull var _id : Int = 0,
+        @PrimaryKey(autoGenerate = true) @NotNull var _id : Int = 0,
         @ColumnInfo(name = "RouteName") var routeName : String = "0",
         @ColumnInfo(name = "RouteID") @NotNull var routeId : Int = 0,
         @ColumnInfo(name = "TransportID") @NotNull var transportId: Int = 0,
@@ -21,7 +21,7 @@ class Entities {
 
     @Entity(tableName = "stops")
     class Stops(
-        @PrimaryKey val _id : Int = 0,
+        @PrimaryKey(autoGenerate = true) val _id : Int = 0,
         @ColumnInfo(name = "StopName") var stopName : String = "0",
         @ColumnInfo(name = "RouteID") var routeId: Int = 0,
         @ColumnInfo(name = "StopID") var stopId: Int = 0,
@@ -30,13 +30,14 @@ class Entities {
     )
 
     @Entity(tableName = "times")
-    class Times(
-        @PrimaryKey @ColumnInfo(name="_id") @NotNull var _id : Int = 0,
-        @ColumnInfo(name = "StopTime") @NotNull var stopTime : String = "0",
-        @ColumnInfo(name = "StopID") @NotNull var stopId : Int = 0,
-        @ColumnInfo(name = "Interval") @NotNull var interval : Int = 0,
-        @ColumnInfo(name = "Night") @NotNull var night : Int = 0,
-        @ColumnInfo(name = "Weekend") @NotNull var weekend : Int = 0,
-        @ColumnInfo(name = "TransportID") @NotNull var transportId: Int = 0
-    )
+    data class NewTimes(
+        @ColumnInfo(name = "StopTime") var stopTime: Int = 0,
+        @ColumnInfo(name = "StopID") var stopId: Int = 0,
+        @ColumnInfo(name = "Night") var night: Int = 0,
+        @ColumnInfo(name = "Weekend") var weekend: Int = 0,
+        @ColumnInfo(name = "TransportID") var transportId: Int = 0
+    ) {
+        @PrimaryKey(autoGenerate = true) @ColumnInfo(name="_id")
+        var _id: Int = 0
+    }
 }

@@ -35,9 +35,6 @@ class DatabaseHelper() {
         if (!::database.isInitialized){
             database = Room.databaseBuilder(context, Database::class.java, databaseName)
                 .allowMainThreadQueries()
-                .addMigrations(object: Migration(3, 4) {
-                    override fun migrate(database: SupportSQLiteDatabase) {}
-                })
                 .createFromAsset(assetDatabaseFile)
                 .build()
         }

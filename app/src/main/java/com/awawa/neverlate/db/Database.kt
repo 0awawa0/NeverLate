@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 
 
 @Database(
-    entities = [Entities.Routes::class, Entities.Stops::class, Entities.Times::class],
+    entities = [Entities.Routes::class, Entities.Stops::class, Entities.NewTimes::class],
     exportSchema = false,
     version = 1
 )

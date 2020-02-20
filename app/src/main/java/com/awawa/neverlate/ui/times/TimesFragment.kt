@@ -8,6 +8,7 @@ import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.GridLayoutManager
 import com.awawa.neverlate.MainActivity
 import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
@@ -36,10 +37,10 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         val root = inflater.inflate(R.layout.fragment_times, container, false)
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
-        root.rvTimes.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
+        root.rvTimes.layoutManager = GridLayoutManager(context, 4)
         root.rvTimes.adapter = adapter
         root.tabLayout.addOnTabSelectedListener(this)
-        presenter.getStops(stopId, false)
+        presenter.getTimeTable(stopId, false)
         return root
     }
 
@@ -47,7 +48,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        presenter.getStops(stopId, p0!!.parent.selectedTabPosition == 1)
+        presenter.getTimeTable(stopId, p0!!.parent.selectedTabPosition == 1)
     }
 
     override fun onTabUnselected(p0: TabLayout.Tab?) {
@@ -56,7 +57,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     override fun onClick(view: View) {
     }
 
-    suspend fun updateTimeTable(times: List<Entities.Times>) {
+    suspend fun updateTimeTable(times: List<Entities.NewTimes>) {
         withContext(Dispatchers.Main) {
             adapter.updateTimeTable(times)
             (requireActivity() as MainActivity).mainLoadingPanel.visibility = GONE
