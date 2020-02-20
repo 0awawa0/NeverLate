@@ -14,10 +14,10 @@ import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
+import com.awawa.neverlate.ui.stops.ARGUMENT_ROUTE_ID
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.coroutines.*
 
-const val ARGUMENT_ROUTE_ID = "routeId"
 
 class RoutesFragment : Fragment(), RVItemClickListener {
 

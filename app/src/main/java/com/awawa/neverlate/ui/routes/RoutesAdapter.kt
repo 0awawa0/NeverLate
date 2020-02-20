@@ -1,11 +1,13 @@
 package com.awawa.neverlate.ui.routes
 
+
 import android.view.ViewGroup
 import android.widget.FrameLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.custom_views.RouteView
+
 
 class RoutesAdapter(private val clickListener: RVItemClickListener)
     : RecyclerView.Adapter<RoutesAdapter.RoutesViewHolder>() {

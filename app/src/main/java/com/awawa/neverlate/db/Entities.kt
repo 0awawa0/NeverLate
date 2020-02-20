@@ -1,11 +1,13 @@
 package com.awawa.neverlate.db
 
+
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import org.jetbrains.annotations.NotNull
 
-class Entities{
+
+class Entities {
 
     @Entity(tableName = "routes")
     class Routes(
@@ -20,20 +22,21 @@ class Entities{
     @Entity(tableName = "stops")
     class Stops(
         @PrimaryKey val _id : Int = 0,
-        @ColumnInfo(name = "StopName") val stopName : String = "0",
-        @ColumnInfo(name = "RouteID") val routeId: Int = 0,
-        @ColumnInfo(name = "StopID") val stopId: Int = 0,
-        @ColumnInfo(name = "StopNumber") val stopNumber : Int = 0,
-        @ColumnInfo(name = "TransportID") val transportId : Int = 0
+        @ColumnInfo(name = "StopName") var stopName : String = "0",
+        @ColumnInfo(name = "RouteID") var routeId: Int = 0,
+        @ColumnInfo(name = "StopID") var stopId: Int = 0,
+        @ColumnInfo(name = "StopNumber") var stopNumber : Int = 0,
+        @ColumnInfo(name = "TransportID") var transportId : Int = 0
     )
 
     @Entity(tableName = "times")
     class Times(
-        @PrimaryKey @ColumnInfo(name="_id") val _id : Int = 0,
-        @ColumnInfo(name = "StopTime") val stopTime : String = "0",
-        @ColumnInfo(name = "StopID") val stopId : Int = 0,
-        @ColumnInfo(name = "Interval") val interval : Int = 0,
-        @ColumnInfo(name = "Night") val night : Int = 0,
-        @ColumnInfo(name = "Weekend") val weekend : Int = 0
+        @PrimaryKey @ColumnInfo(name="_id") @NotNull var _id : Int = 0,
+        @ColumnInfo(name = "StopTime") @NotNull var stopTime : String = "0",
+        @ColumnInfo(name = "StopID") @NotNull var stopId : Int = 0,
+        @ColumnInfo(name = "Interval") @NotNull var interval : Int = 0,
+        @ColumnInfo(name = "Night") @NotNull var night : Int = 0,
+        @ColumnInfo(name = "Weekend") @NotNull var weekend : Int = 0,
+        @ColumnInfo(name = "TransportID") @NotNull var transportId: Int = 0
     )
 }

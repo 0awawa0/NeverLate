@@ -1,9 +1,11 @@
 package com.awawa.neverlate.ui.stops
 
+
 import com.awawa.neverlate.db.DatabaseHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+
 
 class StopsPresenter(private val view: StopsFragment) {
 

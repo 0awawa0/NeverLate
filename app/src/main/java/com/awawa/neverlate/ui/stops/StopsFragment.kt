@@ -13,13 +13,15 @@ import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
-import com.awawa.neverlate.ui.routes.ARGUMENT_ROUTE_ID
+import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_stops.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
+
+const val ARGUMENT_ROUTE_ID = "routeId"
 
 class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickListener {
 
@@ -56,7 +58,9 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
 
 
     override fun onClick(view: View) {
-        (requireActivity() as MainActivity).navController.navigate(R.id.nav_times)
+        val args = Bundle()
+        args.putInt(ARGUMENT_STOP_ID, view.id)
+        (requireActivity() as MainActivity).navController.navigate(R.id.nav_times, args)
     }
 
 

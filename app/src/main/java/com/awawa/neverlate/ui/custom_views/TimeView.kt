@@ -1,10 +1,12 @@
 package com.awawa.neverlate.ui.custom_views
 
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.awawa.neverlate.R
+
 
 class TimeView(context: Context,
                time: String,

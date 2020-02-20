@@ -11,7 +11,7 @@ import java.sql.Time
 
 
 class TimesAdapter(private val clickListener: RVItemClickListener)
-    : RecyclerView.Adapter<TimesAdapter.TimesViewHolder>(){
+    : RecyclerView.Adapter<TimesAdapter.TimesViewHolder>() {
 
     private val dataSet = ArrayList<Entities.Times>()
 
@@ -36,6 +36,7 @@ class TimesAdapter(private val clickListener: RVItemClickListener)
         holder.view.time = dataSet[position].stopTime
         holder.view.interval = dataSet[position].interval
         holder.view.night = dataSet[position].night
+        holder.view.transportId = dataSet[position].transportId
     }
 
 

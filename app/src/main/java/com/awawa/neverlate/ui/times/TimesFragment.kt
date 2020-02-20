@@ -1,5 +1,6 @@
 package com.awawa.neverlate.ui.times
 
+
 import android.graphics.Point
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,6 +18,7 @@ import kotlinx.android.synthetic.main.content_main.*
 import kotlinx.android.synthetic.main.fragment_times.view.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
+
 
 const val ARGUMENT_STOP_ID = "stopId"
 
@@ -42,11 +44,10 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        presenter.getStops(stopId, p0!!.parent.selectedTabPosition == 1)
     }
 
     override fun onTabUnselected(p0: TabLayout.Tab?) {

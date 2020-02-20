@@ -1,10 +1,12 @@
 package com.awawa.neverlate.ui.stops
 
+
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.custom_views.StopView
+
 
 class StopsAdapter(private val clickListener: RVItemClickListener)
     : RecyclerView.Adapter<StopsAdapter.StopsViewHolder>() {
