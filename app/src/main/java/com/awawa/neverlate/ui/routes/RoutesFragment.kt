@@ -15,12 +15,13 @@ import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.stops.ARGUMENT_ROUTE_ID
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_routes.*
 import kotlinx.coroutines.*
 
 
 class RoutesFragment : Fragment(), RVItemClickListener {
 
+    private lateinit var root: View
     private val adapter: RoutesAdapter = RoutesAdapter(this)
     private val presenter: RoutesPresenter = RoutesPresenter(this)
 
@@ -30,7 +31,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_routes, container, false)
+        root = inflater.inflate(R.layout.fragment_routes, container, false)
         val rvRoutes = root.findViewById<RecyclerView>(R.id.rvRoutes)
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
@@ -43,7 +44,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
     suspend fun updateData(routes: List<Entities.Routes>) {
         withContext(Dispatchers.Main) {
             adapter.updateRoutes(routes)
-            requireActivity().mainLoadingPanel.visibility = GONE
+            loadingPanel.visibility = GONE
         }
     }
 

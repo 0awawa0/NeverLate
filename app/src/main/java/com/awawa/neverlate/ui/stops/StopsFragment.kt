@@ -15,8 +15,9 @@ import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_stops.*
 import kotlinx.android.synthetic.main.fragment_stops.view.*
+import kotlinx.android.synthetic.main.layout_loading_panel.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -25,6 +26,7 @@ const val ARGUMENT_ROUTE_ID = "routeId"
 
 class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickListener {
 
+    private lateinit var root: View
     private val adapter = StopsAdapter(this)
     private val presenter = StopsPresenter(this)
     private val routeId by lazy { arguments!!.getInt(ARGUMENT_ROUTE_ID) }
@@ -35,7 +37,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         savedInstanceState: Bundle?
     ): View? {
 
-        val root = inflater.inflate(R.layout.fragment_stops, container, false) as LinearLayout
+        root = inflater.inflate(R.layout.fragment_stops, container, false) as LinearLayout
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
         root.rvStops.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
@@ -50,6 +52,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
 
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
+        loadingPanel.visibility = View.VISIBLE
         presenter.getStops(routeId + p0!!.parent.selectedTabPosition)
     }
 
@@ -67,7 +70,11 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     suspend fun updateData(stops: List<Entities.Stops>) {
         withContext(Dispatchers.Main) {
             adapter.updateStops(stops)
-            requireActivity().mainLoadingPanel.visibility = View.GONE
+            loadingPanel.visibility = View.GONE
+            if (stops.isEmpty())
+                tvStopsError.visibility = View.VISIBLE
+            else
+                tvStopsError.visibility = View.GONE
         }
     }
 }

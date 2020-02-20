@@ -6,17 +6,18 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.awawa.neverlate.MainActivity
-import com.awawa.neverlate.PreCachedLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.content_main.*
+import kotlinx.android.synthetic.main.fragment_stops.view.*
+import kotlinx.android.synthetic.main.fragment_times.*
 import kotlinx.android.synthetic.main.fragment_times.view.*
+import kotlinx.android.synthetic.main.fragment_times.view.tabLayout
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -25,6 +26,7 @@ const val ARGUMENT_STOP_ID = "stopId"
 
 class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickListener {
 
+    private lateinit var root: View
     private val presenter = TimesPresenter(this)
     private val adapter = TimesAdapter(this)
     private val stopId by lazy { arguments!!.getInt(ARGUMENT_STOP_ID)}
@@ -34,7 +36,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val root = inflater.inflate(R.layout.fragment_times, container, false)
+        root = inflater.inflate(R.layout.fragment_times, container, false)
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
         root.rvTimes.layoutManager = GridLayoutManager(context, 4)
@@ -48,6 +50,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
+        loadingPanel.visibility = VISIBLE
         presenter.getTimeTable(stopId, p0!!.parent.selectedTabPosition == 1)
     }
 
@@ -60,7 +63,11 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     suspend fun updateTimeTable(times: List<Entities.NewTimes>) {
         withContext(Dispatchers.Main) {
             adapter.updateTimeTable(times)
-            (requireActivity() as MainActivity).mainLoadingPanel.visibility = GONE
+            loadingPanel.visibility = GONE
+            if (times.isEmpty())
+                tvTimesError.visibility = VISIBLE
+            else
+                tvTimesError.visibility = GONE
         }
     }
 }

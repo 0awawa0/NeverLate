@@ -24,4 +24,6 @@
 
     <string name="weekdays">Будний день</string>
     <string name="weekends">Выходной</string>
+
+    <string name="error_no_data">Нет данных</string>
 </resources>

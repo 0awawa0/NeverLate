@@ -43,5 +43,9 @@ class TimesAdapter(private val clickListener: RVItemClickListener)
     override fun getItemCount(): Int { return dataSet.size }
 
 
-    inner class TimesViewHolder(val view: TimeView): RecyclerView.ViewHolder(view)
+    inner class TimesViewHolder(val view: TimeView): RecyclerView.ViewHolder(view) {
+        init {
+            view.setOnClickListener { view -> run { clickListener.onClick(view) } }
+        }
+    }
 }

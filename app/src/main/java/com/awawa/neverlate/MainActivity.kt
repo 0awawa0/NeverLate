@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         destination: NavDestination,
         arguments: Bundle?
     ) {
-        mainLoadingPanel.visibility = View.VISIBLE
 
         if (destination.id in destinationToColorMap.keys) {
             transportId = destinationToTransportIdMap[destination.id]!!

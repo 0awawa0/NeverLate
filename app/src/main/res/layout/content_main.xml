@@ -18,27 +18,4 @@
         app:layout_constraintTop_toTopOf="parent"
         app:navGraph="@navigation/mobile_navigation" />
 
-    <LinearLayout
-        android:id="@+id/mainLoadingPanel"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:gravity="center"
-        android:backgroundTint="@android:color/white"
-        android:background="@android:color/white">
-        <ProgressBar
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:progressDrawable="@android:color/background_dark"
-            android:indeterminate="true" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/reading_database"
-            android:textAlignment="center"
-            android:textColor="@android:color/black"
-            android:textSize="20sp"/>
-    </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
