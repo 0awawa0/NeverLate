@@ -3,10 +3,7 @@ package com.awawa.neverlate.ui.stops
 
 import android.graphics.Point
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,7 +13,6 @@ import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_stops.*
 import kotlinx.android.synthetic.main.fragment_stops.view.*
-import kotlinx.android.synthetic.main.layout_loading_panel.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
@@ -80,10 +76,13 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         withContext(Dispatchers.Main) {
             adapter.updateStops(stops)
             loadingPanel.visibility = View.GONE
-            if (stops.isEmpty())
-                tvStopsError.visibility = View.VISIBLE
-            else
-                tvStopsError.visibility = View.GONE
+            if (stops.isEmpty()) tvStopsError.visibility = View.VISIBLE
+            else tvStopsError.visibility = View.GONE
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        toast(requireContext(), "StopsFragment action", Toast.LENGTH_SHORT)
+        return true
     }
 }

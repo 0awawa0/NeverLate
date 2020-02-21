@@ -2,17 +2,15 @@ package com.awawa.neverlate.db
 
 
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+
 
 const val assetDatabaseFile = "database/database.db"
 const val databaseName = "NeverlateDB"
 
 class DatabaseHelper() {
 
-    private val TAG = "DatabaseHelper"
+    private val tag = "DatabaseHelper"
 
     companion object {
         private lateinit var instance : DatabaseHelper
@@ -24,7 +22,7 @@ class DatabaseHelper() {
             return instance
         }
 
-        public fun getDatabase(context: Context) : Database {
+        fun getDatabase(context: Context) : Database {
             return getInstance(context).database
         }
     }

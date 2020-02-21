@@ -3,12 +3,9 @@ package com.awawa.neverlate.ui.times
 
 import android.graphics.Point
 import android.os.Bundle
-import android.view.ContextMenu
-import android.view.LayoutInflater
-import android.view.View
+import android.view.*
 import android.view.View.GONE
 import android.view.View.VISIBLE
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
@@ -74,10 +71,13 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         withContext(Dispatchers.Main) {
             adapter.updateTimeTable(times)
             loadingPanel.visibility = GONE
-            if (times.isEmpty())
-                tvTimesError.visibility = VISIBLE
-            else
-                tvTimesError.visibility = GONE
+            if (times.isEmpty()) tvTimesError.visibility = VISIBLE
+            else tvTimesError.visibility = GONE
         }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        toast(requireContext(), "TimesFragment action", Toast.LENGTH_SHORT)
+        return true
     }
 }

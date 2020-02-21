@@ -26,4 +26,11 @@
     <string name="weekends">Выходной</string>
 
     <string name="error_no_data">Нет данных</string>
+
+    <string name="add_route">Добавить маршрут</string>
+
+    <string name="dialog_add_route_title">Добавление нового маршрута</string>
+    <string name="dialog_add_route_route_number">Номер маршрута</string>
+    <string name="dialog_add_route_route_first">Начальная остановка</string>
+    <string name="dialog_add_route_route_last">Конечная остановка</string>
 </resources>

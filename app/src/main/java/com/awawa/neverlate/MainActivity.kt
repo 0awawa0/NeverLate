@@ -3,7 +3,8 @@ package com.awawa.neverlate
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.view.View
+import android.view.Menu
+import android.view.MenuItem
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -13,18 +14,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlinx.android.synthetic.main.activity_main.*
-import kotlinx.android.synthetic.main.content_main.*
 
 
 class MainActivity : AppCompatActivity(R.layout.activity_main),
     NavController.OnDestinationChangedListener {
 
-    private val TAG = "MainActivity"
+    private val tag = "MainActivity"
     private lateinit var appBarConfiguration: AppBarConfiguration
-    var transportId = 1
-    var routeId = 1
     lateinit var navController: NavController
 
     private val destinationToColorMap = mapOf(
@@ -32,12 +29,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         R.id.nav_trolley to R.color.item_trolley,
         R.id.nav_bus to R.color.item_bus,
         R.id.nav_marsh to R.color.item_marsh
-    )
-    private val destinationToTransportIdMap = mapOf(
-        R.id.nav_tram to 1,
-        R.id.nav_trolley to 2,
-        R.id.nav_bus to 3,
-        R.id.nav_marsh to 4
     )
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -71,7 +62,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     ) {
 
         if (destination.id in destinationToColorMap.keys) {
-            transportId = destinationToTransportIdMap[destination.id]!!
             if (isMarshmallowOrHigher()) {
                 bottom_nav_view.itemIconTintList = resources.getColorStateList(
                     destinationToColorMap[destination.id]!!, theme
@@ -84,5 +74,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
                 bottom_nav_view.itemTextColor = bottom_nav_view.itemIconTintList
             }
         } else { return }
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.toolbar_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return super.onOptionsItemSelected(item)
     }
 }
