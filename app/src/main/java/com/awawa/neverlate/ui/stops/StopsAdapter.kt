@@ -38,6 +38,9 @@ class StopsAdapter(private val clickListener: RVItemClickListener)
     inner class StopsViewHolder(val view: StopView): RecyclerView.ViewHolder(view) {
         init {
             view.setOnClickListener{ view -> run { clickListener.onClick(view) }}
+            view.setOnCreateContextMenuListener { menu, v, menuInfo -> run {
+                clickListener.onCreateContextMenu(menu, v, menuInfo, adapterPosition)
+            }}
         }
     }
 }

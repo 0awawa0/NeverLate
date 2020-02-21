@@ -7,12 +7,12 @@ import androidx.room.Room
 import androidx.room.migration.Migration
 import androidx.sqlite.db.SupportSQLiteDatabase
 
+const val assetDatabaseFile = "database/database.db"
+const val databaseName = "NeverlateDB"
 
 class DatabaseHelper() {
 
     private val TAG = "DatabaseHelper"
-    private val databaseName = "NeverLateDB"
-    private val assetDatabaseFile = "database/database.db"
 
     companion object {
         private lateinit var instance : DatabaseHelper

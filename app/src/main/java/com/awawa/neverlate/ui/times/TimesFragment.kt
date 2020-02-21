@@ -3,18 +3,20 @@ package com.awawa.neverlate.ui.times
 
 import android.graphics.Point
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.View.VISIBLE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
+import com.awawa.neverlate.toast
 import com.google.android.material.tabs.TabLayout
-import kotlinx.android.synthetic.main.fragment_stops.view.*
 import kotlinx.android.synthetic.main.fragment_times.*
 import kotlinx.android.synthetic.main.fragment_times.view.*
 import kotlinx.android.synthetic.main.fragment_times.view.tabLayout
@@ -46,18 +48,26 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         return root
     }
 
-    override fun onTabReselected(p0: TabLayout.Tab?) {
-    }
+    override fun onTabReselected(p0: TabLayout.Tab?) {}
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         loadingPanel.visibility = VISIBLE
         presenter.getTimeTable(stopId, p0!!.parent.selectedTabPosition == 1)
     }
 
-    override fun onTabUnselected(p0: TabLayout.Tab?) {
-    }
+    override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
     override fun onClick(view: View) {
+        toast(requireContext(), "Click", Toast.LENGTH_SHORT)
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?,
+        position: Int
+    ) {
+        toast(requireContext(), "onCreateContextMenu", Toast.LENGTH_SHORT)
     }
 
     suspend fun updateTimeTable(times: List<Entities.NewTimes>) {

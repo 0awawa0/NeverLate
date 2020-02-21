@@ -12,19 +12,22 @@ class Daos {
     @Dao
     interface RouteDao {
         @Query("SELECT * FROM routes WHERE TransportID == :id AND Reverse == 0 ORDER BY RouteNumber")
-        suspend fun getRoutes(id: Int): List<Entities.Routes>
+        fun getRoutes(id: Int): List<Entities.Routes>
+
+        @Query("SELECT * FROM routes")
+        fun getAllRoutes(): List<Entities.Routes>
     }
 
     @Dao
     interface StopDao {
         @Query("SELECT * FROM stops WHERE RouteID == :routeId ORDER BY StopNumber")
-        suspend fun getAllStops(routeId: Int) : List<Entities.Stops>
+        fun getAllStops(routeId: Int) : List<Entities.Stops>
 
         @Query("SELECT * FROM stops")
-        suspend fun getAllStops(): List<Entities.Stops>
+        fun getAllStops(): List<Entities.Stops>
 
         @Query("SELECT TransportID FROM stops WHERE StopID == :stopId")
-        suspend fun resolveTransportID(stopId: Int): Int?
+        fun resolveTransportID(stopId: Int): Int?
     }
 
 
@@ -32,9 +35,9 @@ class Daos {
     interface TimesDao {
 
         @Insert
-        suspend fun putTime(time: Entities.NewTimes)
+        fun putTime(time: Entities.NewTimes)
 
         @Query("SELECT * FROM times WHERE StopID == :stopId AND Weekend == :weekend ORDER BY StopTime")
-        suspend fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.NewTimes>
+        fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.NewTimes>
     }
 }

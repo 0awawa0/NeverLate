@@ -3,15 +3,14 @@ package com.awawa.neverlate.ui.stops
 
 import android.graphics.Point
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-import com.awawa.neverlate.MainActivity
-import com.awawa.neverlate.PreCachedLayoutManager
-import com.awawa.neverlate.R
-import com.awawa.neverlate.RVItemClickListener
+import com.awawa.neverlate.*
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
 import com.google.android.material.tabs.TabLayout
@@ -64,6 +63,16 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         val args = Bundle()
         args.putInt(ARGUMENT_STOP_ID, view.id)
         (requireActivity() as MainActivity).navController.navigate(R.id.nav_times, args)
+    }
+
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?,
+        position: Int
+    ) {
+        toast(requireContext(), "onCreateContextMenu", Toast.LENGTH_SHORT)
     }
 
 

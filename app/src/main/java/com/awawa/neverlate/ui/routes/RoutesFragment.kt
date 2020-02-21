@@ -3,16 +3,15 @@ package com.awawa.neverlate.ui.routes
 
 import android.graphics.Point
 import android.os.Bundle
+import android.view.ContextMenu
 import android.view.LayoutInflater
 import android.view.View
 import android.view.View.GONE
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
-import com.awawa.neverlate.MainActivity
-import com.awawa.neverlate.PreCachedLayoutManager
-import com.awawa.neverlate.R
-import com.awawa.neverlate.RVItemClickListener
+import com.awawa.neverlate.*
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.stops.ARGUMENT_ROUTE_ID
 import kotlinx.android.synthetic.main.fragment_routes.*
@@ -52,5 +51,14 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         val args = Bundle()
         args.putInt(ARGUMENT_ROUTE_ID, view.id)
         ((requireActivity() as MainActivity).navController).navigate(R.id.nav_stops, args)
+    }
+
+    override fun onCreateContextMenu(
+        menu: ContextMenu,
+        v: View,
+        menuInfo: ContextMenu.ContextMenuInfo?,
+        position: Int
+    ) {
+        toast(requireContext(), "onCreateContextMenu", Toast.LENGTH_SHORT)
     }
 }
