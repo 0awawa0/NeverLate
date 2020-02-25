@@ -23,6 +23,19 @@ class StopsPresenter(private val view: StopsFragment) {
         GlobalScope.launch {
             val database = DatabaseHelper.getDatabase(view.requireContext())
             database.timesDao().deleteTimetableForStop(stopId)
+            val stops = database.stopsDao().getAllStops(
+                view.routeId + view.tabLayout.selectedTabPosition
+            )
+            val stopToDelete = database.stopsDao().checkStop(stopId)
+            for (i in stops.indices) {
+                if (stops[i].stopNumber == stopToDelete!!.stopNumber) {
+                    for (j in i + 1 until stops.size) {
+                        stops[j].stopNumber--
+                        database.stopsDao().updateStop(stops[j])
+                    }
+                    break
+                }
+            }
             database.stopsDao().deleteStop(stopId)
             view.updateData(database.stopsDao().getAllStops(
                 view.routeId + view.tabLayout.selectedTabPosition
