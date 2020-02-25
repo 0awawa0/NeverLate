@@ -28,7 +28,7 @@ class TimesPresenter(private val view: TimesFragment) {
                     view.stopId,
                     if (night) 1 else 0,
                     view.tabLayout.selectedTabPosition,
-                    view.trasnportId
+                    view.transportId
                 ))
 
                 view.updateTimeTable(database.timesDao().getTimeTable(

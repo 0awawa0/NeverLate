@@ -1,7 +1,6 @@
 package com.awawa.neverlate
 
 
-import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -14,10 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import com.awawa.neverlate.db.TRANSPORT_ID_BUS
+import com.awawa.neverlate.db.TRANSPORT_ID_MARSH
+import com.awawa.neverlate.db.TRANSPORT_ID_TRAM
+import com.awawa.neverlate.db.TRANSPORT_ID_TROLLEY
 import com.awawa.neverlate.utils.isMarshmallowOrHigher
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
 
+
+val transportIdToColorMap = mapOf(
+    TRANSPORT_ID_TRAM to R.color.colorTram,
+    TRANSPORT_ID_BUS to R.color.colorBus,
+    TRANSPORT_ID_TROLLEY to R.color.colorTrolley,
+    TRANSPORT_ID_MARSH to R.color.colorMarsh
+)
 
 class MainActivity : AppCompatActivity(R.layout.activity_main),
     NavController.OnDestinationChangedListener {

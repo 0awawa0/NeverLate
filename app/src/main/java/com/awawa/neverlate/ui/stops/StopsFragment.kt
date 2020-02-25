@@ -34,6 +34,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     val routeId by lazy { arguments!!.getInt(ARGUMENT_ROUTE_ID) }
     val transportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID)}
 
+
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -54,6 +55,8 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
                 return true
             }
         })
+
+        tabLayout.setSelectedTabIndicatorColor(transportIdToColorMap.getValue(transportId))
         return root
     }
 

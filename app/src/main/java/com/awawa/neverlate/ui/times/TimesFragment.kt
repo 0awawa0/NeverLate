@@ -13,6 +13,7 @@ import com.awawa.neverlate.MainActivity
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
+import com.awawa.neverlate.transportIdToColorMap
 import com.awawa.neverlate.ui.routes.ARGUMENT_TRANSPORT_ID
 import com.awawa.neverlate.utils.showAddNewTimeDialog
 import com.awawa.neverlate.utils.showChangeTimeDialog
@@ -36,7 +37,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     val presenter = TimesPresenter(this)
 
     val stopId by lazy { arguments!!.getInt(ARGUMENT_STOP_ID)}
-    val trasnportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID)}
+    val transportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID)}
     val tabLayout: TabLayout by lazy { root.findViewById<TabLayout>(R.id.tabLayout) }
 
 
@@ -59,6 +60,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
                 return true
             }
         })
+        tabLayout.setSelectedTabIndicatorColor(transportIdToColorMap.getValue(transportId))
         return root
     }
 
