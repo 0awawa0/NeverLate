@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
-import com.awawa.neverlate.minutesToTime
+import com.awawa.neverlate.utils.minutesToTime
 import com.awawa.neverlate.ui.custom_views.TimeView
 
 

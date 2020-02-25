@@ -14,6 +14,13 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
+import com.awawa.neverlate.db.TRANSPORT_ID_BUS
+import com.awawa.neverlate.db.TRANSPORT_ID_MARSH
+import com.awawa.neverlate.db.TRANSPORT_ID_TRAM
+import com.awawa.neverlate.db.TRANSPORT_ID_TROLLEY
+import com.awawa.neverlate.ui.routes.RoutesFragment
+import com.awawa.neverlate.utils.isMarshmallowOrHigher
+import com.awawa.neverlate.utils.showAddRouteDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -30,6 +37,14 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         R.id.nav_bus to R.color.item_bus,
         R.id.nav_marsh to R.color.item_marsh
     )
+
+    private val destinationToTransportIdMap = mapOf(
+        R.id.nav_tram to TRANSPORT_ID_TRAM,
+        R.id.nav_trolley to TRANSPORT_ID_TROLLEY,
+        R.id.nav_bus to TRANSPORT_ID_BUS,
+        R.id.nav_marsh to TRANSPORT_ID_MARSH
+    )
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -50,10 +65,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         bottom_nav_view.setupWithNavController(navController)
         navController.addOnDestinationChangedListener(this)
     }
+
+
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
+
 
     override fun onDestinationChanged(
         controller: NavController,
@@ -64,24 +82,41 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         if (destination.id in destinationToColorMap.keys) {
             if (isMarshmallowOrHigher()) {
                 bottom_nav_view.itemIconTintList = resources.getColorStateList(
-                    destinationToColorMap[destination.id]!!, theme
+                    destinationToColorMap.getValue(destination.id), theme
                 )
                 bottom_nav_view.itemTextColor = bottom_nav_view.itemIconTintList
             } else {
                 bottom_nav_view.itemIconTintList = resources.getColorStateList(
-                    destinationToColorMap[destination.id]!!, theme
+                    destinationToColorMap.getValue(destination.id), theme
                 )
                 bottom_nav_view.itemTextColor = bottom_nav_view.itemIconTintList
             }
         } else { return }
     }
 
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.toolbar_menu, menu)
         return true
     }
 
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
+
+        if (item.itemId == R.id.plus) {
+            when (navController.currentDestination?.id){
+                R.id.nav_tram,
+                R.id.nav_trolley,
+                R.id.nav_bus,
+                R.id.nav_marsh -> {
+                    (supportFragmentManager.fragments[0] as RoutesFragment).addNewRoute()
+                }
+
+                R.id.nav_stops -> {}
+                R.id.nav_times -> {}
+            }
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
 }

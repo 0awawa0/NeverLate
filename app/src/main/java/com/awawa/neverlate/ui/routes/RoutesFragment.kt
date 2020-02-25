@@ -1,7 +1,6 @@
 package com.awawa.neverlate.ui.routes
 
 
-import android.app.AlertDialog
 import android.graphics.Point
 import android.os.Bundle
 import android.view.*
@@ -12,6 +11,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.awawa.neverlate.*
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.stops.ARGUMENT_ROUTE_ID
+import com.awawa.neverlate.utils.showAddNewRouteDialog
+import com.awawa.neverlate.utils.showDeleteRouteDialog
+import com.awawa.neverlate.utils.toast
 import kotlinx.android.synthetic.main.fragment_routes.*
 import kotlinx.coroutines.*
 
@@ -21,6 +23,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
     private lateinit var root: View
     private val adapter: RoutesAdapter = RoutesAdapter(this)
     private val presenter: RoutesPresenter = RoutesPresenter(this)
+    private var transportId: Int = 0
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -34,7 +37,8 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         requireActivity().windowManager.defaultDisplay.getSize(size)
         rvRoutes.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
         rvRoutes.adapter = adapter
-        presenter.getRoutes((arguments!!.get("transportId") as Int))
+        transportId = arguments!!.get("transportId") as Int
+        presenter.getRoutes(transportId)
         return root
     }
 
@@ -61,32 +65,26 @@ class RoutesFragment : Fragment(), RVItemClickListener {
             0,
             v.id,
             0,
-            getString(R.string.add_route)
+            getString(R.string.delete_route)
         )
     }
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        if (item.order == 0) {
-            val view = LayoutInflater.from(requireContext()).inflate(
-                R.layout.layout_dialog_add_route, null, false
-            )
-            AlertDialog.Builder(requireContext())
-                .setView(view)
-                .setCancelable(false)
-                .setPositiveButton(android.R.string.ok) { _, _ -> run {
-                    toast(requireContext(), "Added route", Toast.LENGTH_SHORT)
-                }}
-                .setNegativeButton(android.R.string.cancel) { _, _ -> run {
-                    toast(requireContext(), "Adding new route canceled", Toast.LENGTH_SHORT)
-                }}
-                .show()
-        }
+        if (item.order == 0) { showDeleteRouteDialog(item.itemId) }
         return true
     }
 
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        toast(requireContext(), "RoutesFragment action", Toast.LENGTH_SHORT)
+        toast(
+            requireContext(),
+            "RoutesFragment action",
+            Toast.LENGTH_SHORT
+        )
         return true
     }
+
+
+    fun addNewRoute() {showAddNewRouteDialog()}
+    fun deleteRoute(routeId: Int) { presenter.deleteRoute(routeId, transportId) }
 }

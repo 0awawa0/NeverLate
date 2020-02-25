@@ -8,6 +8,12 @@ import androidx.room.Room
 const val assetDatabaseFile = "database/database.db"
 const val databaseName = "NeverlateDB"
 
+const val TRANSPORT_ID_TRAM = 1
+const val TRANSPORT_ID_TROLLEY = 2
+const val TRANSPORT_ID_BUS = 3
+const val TRANSPORT_ID_MARSH = 4
+
+
 class DatabaseHelper() {
 
     private val tag = "DatabaseHelper"
@@ -24,6 +30,10 @@ class DatabaseHelper() {
 
         fun getDatabase(context: Context) : Database {
             return getInstance(context).database
+        }
+
+        fun checkRouteId(routeId: Int): Boolean {
+            return instance.database.routesDao().checkRoute(routeId) != null
         }
     }
 

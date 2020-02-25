@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import com.awawa.neverlate.*
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
+import com.awawa.neverlate.utils.toast
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_stops.*
 import kotlinx.android.synthetic.main.fragment_stops.view.*
@@ -82,7 +83,11 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        toast(requireContext(), "StopsFragment action", Toast.LENGTH_SHORT)
+        toast(
+            requireContext(),
+            "StopsFragment action",
+            Toast.LENGTH_SHORT
+        )
         return true
     }
 }

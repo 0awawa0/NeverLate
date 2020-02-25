@@ -17,4 +17,27 @@ class RoutesPresenter(private val view: RoutesFragment) {
                 .getRoutes(transportId))
         }
     }
+
+    fun deleteRoute(routeId: Int, transportId: Int) {
+        GlobalScope.launch {
+            val database = DatabaseHelper.getDatabase(view.requireContext())
+            val stopsForStraightRoute = database.stopsDao().getAllStops(routeId)
+            val stopsForReverseRoute = database.stopsDao().getAllStops(routeId + 1)
+
+            for (stop in stopsForStraightRoute) {
+                database.timesDao().deleteTimetableForStop(stop.stopId)
+            }
+            database.stopsDao().deleteStopsForRoute(routeId)
+
+            for (stop in stopsForReverseRoute) {
+                database.timesDao().deleteTimetableForStop(stop.stopId)
+            }
+            database.stopsDao().deleteStopsForRoute(routeId + 1)
+
+            database.routesDao().deleteRoute(routeId)
+            database.routesDao().deleteRoute(routeId + 1)
+
+            view.updateData(database.routesDao().getRoutes(transportId))
+        }
+    }
 }

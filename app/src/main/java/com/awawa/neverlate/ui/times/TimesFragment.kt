@@ -12,7 +12,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
-import com.awawa.neverlate.toast
+import com.awawa.neverlate.utils.toast
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_times.*
 import kotlinx.android.synthetic.main.fragment_times.view.*
@@ -77,7 +77,11 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        toast(requireContext(), "TimesFragment action", Toast.LENGTH_SHORT)
+        toast(
+            requireContext(),
+            "TimesFragment action",
+            Toast.LENGTH_SHORT
+        )
         return true
     }
 }

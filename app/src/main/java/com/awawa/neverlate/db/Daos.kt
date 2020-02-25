@@ -1,10 +1,7 @@
 package com.awawa.neverlate.db
 
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 
 
 class Daos {
@@ -16,6 +13,15 @@ class Daos {
 
         @Query("SELECT * FROM routes")
         fun getAllRoutes(): List<Entities.Routes>
+
+        @Insert
+        fun addNewRoute(route: Entities.Routes)
+
+        @Query("SELECT * FROM routes WHERE routeId == :routeId")
+        fun checkRoute(routeId: Int): Entities.Routes?
+
+        @Query("DELETE FROM routes WHERE routeId == :routeId")
+        fun deleteRoute(routeId: Int)
     }
 
     @Dao
@@ -28,6 +34,9 @@ class Daos {
 
         @Query("SELECT TransportID FROM stops WHERE StopID == :stopId")
         fun resolveTransportID(stopId: Int): Int?
+
+        @Query("DELETE FROM stops WHERE routeId == :routeId")
+        fun deleteStopsForRoute(routeId: Int)
     }
 
 
@@ -39,5 +48,8 @@ class Daos {
 
         @Query("SELECT * FROM times WHERE StopID == :stopId AND Weekend == :weekend ORDER BY StopTime")
         fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.NewTimes>
+
+        @Query("DELETE FROM times WHERE StopID == :stopId")
+        fun deleteTimetableForStop(stopId: Int)
     }
 }

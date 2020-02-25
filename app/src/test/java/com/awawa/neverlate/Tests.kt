@@ -1,5 +1,7 @@
 package com.awawa.neverlate
 
+import com.awawa.neverlate.utils.minutesToTime
+import com.awawa.neverlate.utils.timeToMinutes
 import org.junit.Test
 
 class Tests {
