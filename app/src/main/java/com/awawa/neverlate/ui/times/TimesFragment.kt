@@ -60,7 +60,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
                 return true
             }
         })
-        tabLayout.setSelectedTabIndicatorColor(transportIdToColorMap.getValue(transportId))
+        tabLayout.setSelectedTabIndicatorColor(resources.getColor(transportIdToColorMap.getValue(transportId)))
         return root
     }
 

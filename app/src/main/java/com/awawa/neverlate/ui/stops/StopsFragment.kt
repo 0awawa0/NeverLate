@@ -56,7 +56,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
             }
         })
 
-        tabLayout.setSelectedTabIndicatorColor(transportIdToColorMap.getValue(transportId))
+        tabLayout.setSelectedTabIndicatorColor(resources.getColor(transportIdToColorMap.getValue(transportId)))
         return root
     }
 
