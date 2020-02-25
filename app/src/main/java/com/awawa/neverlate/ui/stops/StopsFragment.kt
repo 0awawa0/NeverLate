@@ -9,7 +9,10 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import com.awawa.neverlate.*
 import com.awawa.neverlate.db.Entities
+import com.awawa.neverlate.ui.routes.ARGUMENT_TRANSPORT_ID
 import com.awawa.neverlate.ui.times.ARGUMENT_STOP_ID
+import com.awawa.neverlate.utils.showAddStopDialog
+import com.awawa.neverlate.utils.showDeleteStopDialog
 import com.awawa.neverlate.utils.toast
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_stops.*
@@ -24,8 +27,12 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
 
     private lateinit var root: View
     private val adapter = StopsAdapter(this)
-    private val presenter = StopsPresenter(this)
-    private val routeId by lazy { arguments!!.getInt(ARGUMENT_ROUTE_ID) }
+
+    val presenter = StopsPresenter(this)
+
+    val tabLayout: TabLayout by lazy { root.findViewById<TabLayout>(R.id.tabLayout) }
+    val routeId by lazy { arguments!!.getInt(ARGUMENT_ROUTE_ID) }
+    val transportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID)}
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -40,6 +47,13 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         root.rvStops.adapter = adapter
         root.tabLayout.addOnTabSelectedListener(this)
         presenter.getStops(routeId)
+
+        (requireActivity() as MainActivity).registerMenuItemSelectCallback(object: MainActivity.MenuItemSelectCallback {
+            override fun onItemSelected(item: MenuItem): Boolean {
+                showAddStopDialog()
+                return true
+            }
+        })
         return root
     }
 
@@ -69,7 +83,17 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         menuInfo: ContextMenu.ContextMenuInfo?,
         position: Int
     ) {
-        toast(requireContext(), "onCreateContextMenu", Toast.LENGTH_SHORT)
+        menu.add(
+            1,
+            v.id,
+            0,
+            getString(R.string.delete_stop)
+        )
+    }
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if (item.order == 0) showDeleteStopDialog(item.itemId)
+        return super.onContextItemSelected(item)
     }
 
 

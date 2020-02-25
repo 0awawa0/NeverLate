@@ -14,13 +14,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
-import com.awawa.neverlate.db.TRANSPORT_ID_BUS
-import com.awawa.neverlate.db.TRANSPORT_ID_MARSH
-import com.awawa.neverlate.db.TRANSPORT_ID_TRAM
-import com.awawa.neverlate.db.TRANSPORT_ID_TROLLEY
-import com.awawa.neverlate.ui.routes.RoutesFragment
 import com.awawa.neverlate.utils.isMarshmallowOrHigher
-import com.awawa.neverlate.utils.showAddRouteDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 
@@ -38,12 +32,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         R.id.nav_marsh to R.color.item_marsh
     )
 
-    private val destinationToTransportIdMap = mapOf(
-        R.id.nav_tram to TRANSPORT_ID_TRAM,
-        R.id.nav_trolley to TRANSPORT_ID_TROLLEY,
-        R.id.nav_bus to TRANSPORT_ID_BUS,
-        R.id.nav_marsh to TRANSPORT_ID_MARSH
-    )
+    private var menuItemSelectCallback: MenuItemSelectCallback? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -104,19 +93,19 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
 
         if (item.itemId == R.id.plus) {
-            when (navController.currentDestination?.id){
-                R.id.nav_tram,
-                R.id.nav_trolley,
-                R.id.nav_bus,
-                R.id.nav_marsh -> {
-                    (supportFragmentManager.fragments[0] as RoutesFragment).addNewRoute()
-                }
-
-                R.id.nav_stops -> {}
-                R.id.nav_times -> {}
-            }
-            return true
+            if (menuItemSelectCallback != null)
+                return menuItemSelectCallback!!.onItemSelected(item)
+            return false
         }
         return super.onOptionsItemSelected(item)
+    }
+
+
+    fun registerMenuItemSelectCallback(callback: MenuItemSelectCallback?) {
+        this.menuItemSelectCallback = callback
+    }
+
+    interface MenuItemSelectCallback {
+        fun onItemSelected(item: MenuItem): Boolean
     }
 }

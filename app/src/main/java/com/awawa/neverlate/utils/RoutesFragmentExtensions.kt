@@ -19,16 +19,17 @@ import java.util.*
 fun RoutesFragment.showDeleteRouteDialog(routeId: Int) {
 
 
-        AlertDialog.Builder(requireContext())
-            .setTitle(R.string.dialog_delete_route_title)
-            .setMessage(R.string.dialog_delete_route_message)
-            .setPositiveButton(android.R.string.ok) { _, _ -> run {
-                this@showDeleteRouteDialog.deleteRoute(routeId)
-            }}
-            .setNegativeButton(android.R.string.cancel) { _, _ -> run {
-                toast(requireContext(), "Dialog deletion canceled", Toast.LENGTH_SHORT)
-            }}
-            .show()
+    AlertDialog.Builder(requireContext())
+        .setTitle(R.string.dialog_delete_route_title)
+        .setMessage(R.string.dialog_delete_route_message)
+        .setPositiveButton(android.R.string.ok) { _, _ -> run {
+            presenter.deleteRoute(routeId, transportId)
+        }}
+        .setNegativeButton(android.R.string.cancel) { _, _ -> run {
+            toast(requireContext(), "Dialog deletion canceled", Toast.LENGTH_SHORT)
+        }}
+        .setCancelable(false)
+        .show()
 }
 
 
@@ -40,51 +41,19 @@ fun RoutesFragment.showAddNewRouteDialog() {
         .setView(view)
         .setCancelable(false)
         .setPositiveButton(android.R.string.ok) { _, _ -> run {
-            GlobalScope.launch {
-                val database = DatabaseHelper.getDatabase(requireContext())
-                val random = Random()
-                var routeId = random.nextInt()
-                while (DatabaseHelper.checkRouteId(routeId)
-                    and DatabaseHelper.checkRouteId(routeId + 1)
-                ) { routeId = random.nextInt() }
-
-                if (view.etRouteNumber.text.isNotEmpty()
-                    and view.etRouteFirst.text.isNotEmpty()
-                    and view.etRouteLast.text.isNotEmpty()
-                ) {
-                    val routeNumber = view.etRouteNumber.text.toString()
-                    val routeFirst = view.etRouteFirst.text.toString()
-                    val routeLast = view.etRouteLast.text.toString()
-
-                    val newRouteStraight = Entities.Routes(0,
-                        "$routeFirst - $routeLast",
-                        routeId,
-                        transportId,
-                        routeNumber,
-                        0
-                    )
-
-                    val newRouteReverse = Entities.Routes(
-                        0,
-                        "$routeFirst - $routeLast",
-                        routeId + 1,
-                        transportId,
-                        routeNumber,
-                        1
-                    )
-
-                    database.routesDao().addNewRoute(newRouteStraight)
-                    database.routesDao().addNewRoute(newRouteReverse)
-                }
-                withContext(Dispatchers.Main) {
-                    this@showAddRouteDialog.navController.navigate(
-                        navController.currentDestination!!.id
-                    )
-                }
+            if (view.etRouteNumber.text.isNotEmpty()
+                and view.etRouteFirst.text.isNotEmpty()
+                and view.etRouteLast.text.isNotEmpty()) {
+                presenter.addNewRoute(
+                    view.etRouteNumber.text.toString(),
+                    view.etRouteFirst.text.toString(),
+                    view.etRouteLast.text.toString()
+                )
             }
         }}
         .setNegativeButton(android.R.string.cancel) { _, _ -> run {
-            toast(this, "Adding new route canceled", Toast.LENGTH_SHORT)
+            toast(requireContext(), "Adding new route canceled", Toast.LENGTH_SHORT)
         }}
+        .setCancelable(false)
         .show()
 }

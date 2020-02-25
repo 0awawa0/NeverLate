@@ -35,6 +35,10 @@ class DatabaseHelper() {
         fun checkRouteId(routeId: Int): Boolean {
             return instance.database.routesDao().checkRoute(routeId) != null
         }
+
+        fun checkStopId(stopId: Int): Boolean {
+            return instance.database.stopsDao().checkStop(stopId) != null
+        }
     }
 
     private lateinit var database: Database

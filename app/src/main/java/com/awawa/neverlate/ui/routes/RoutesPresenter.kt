@@ -2,9 +2,11 @@ package com.awawa.neverlate.ui.routes
 
 
 import com.awawa.neverlate.db.DatabaseHelper
+import com.awawa.neverlate.db.Entities
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import java.util.*
 
 
 class RoutesPresenter(private val view: RoutesFragment) {
@@ -38,6 +40,43 @@ class RoutesPresenter(private val view: RoutesFragment) {
             database.routesDao().deleteRoute(routeId + 1)
 
             view.updateData(database.routesDao().getRoutes(transportId))
+        }
+    }
+
+
+    fun addNewRoute(routeNumber: String, routeFirst: String, routeLast: String) {
+        GlobalScope.launch {
+            val database = DatabaseHelper.getDatabase(view.requireContext())
+            val random = Random()
+            var routeId = random.nextInt()
+            while (DatabaseHelper.checkRouteId(routeId)
+                and DatabaseHelper.checkRouteId(routeId + 1)
+            ) {
+                routeId = random.nextInt()
+            }
+
+            val newRouteStraight = Entities.Routes(
+                0,
+                "$routeFirst - $routeLast",
+                routeId,
+                view.transportId,
+                routeNumber,
+                0
+            )
+
+            val newRouteReverse = Entities.Routes(
+                0,
+                "$routeFirst - $routeLast",
+                routeId + 1,
+                view.transportId,
+                routeNumber,
+                1
+            )
+
+            database.routesDao().addNewRoute(newRouteStraight)
+            database.routesDao().addNewRoute(newRouteReverse)
+
+            view.updateData(database.routesDao().getRoutes(view.transportId))
         }
     }
 }

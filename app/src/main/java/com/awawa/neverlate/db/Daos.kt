@@ -37,6 +37,18 @@ class Daos {
 
         @Query("DELETE FROM stops WHERE routeId == :routeId")
         fun deleteStopsForRoute(routeId: Int)
+
+        @Query("DELETE FROM stops WHERE stopId == :stopId")
+        fun deleteStop(stopId: Int)
+
+        @Query("SELECT * FROM stops WHERE stopId == :stopId")
+        fun checkStop(stopId: Int): Entities.Stops?
+
+        @Update
+        fun updateStop(stop: Entities.Stops)
+
+        @Insert
+        fun addStop(stop: Entities.Stops)
     }
 
 

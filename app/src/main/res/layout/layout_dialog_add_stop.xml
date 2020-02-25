@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="15dp"
+        android:textSize="24sp"
+        android:textColor="@android:color/black"
+        android:text="@string/dialog_add_stop_title"/>
+
+    <TextView
+        android:id="@+id/tvStopName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:paddingStart="10dp"
+        android:textColor="@android:color/black"
+        android:text="@string/dialog_add_stop_name"/>
+
+    <EditText
+        android:id="@+id/etStopName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/tvStopOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_stop_order"
+        android:textSize="16sp"
+        android:paddingStart="10dp"
+        android:textColor="@android:color/black"/>
+
+    <EditText
+        android:id="@+id/etStopOrder"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="16sp"
+        android:textColor="@android:color/black"
+        android:inputType="number"/>
+
+</LinearLayout>

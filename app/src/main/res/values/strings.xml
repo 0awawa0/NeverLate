@@ -30,13 +30,25 @@
     <string name="add_route">Добавить маршрут</string>
     <string name="delete_route">Удалить маршрут</string>
 
+    <string name="add_stop">Добавить остановку</string>
+    <string name="delete_stop">Удалить остановку</string>
+
     <string name="dialog_add_route_title">Добавление нового маршрута</string>
     <string name="dialog_add_route_route_number">Номер маршрута</string>
     <string name="dialog_add_route_route_first">Начальная остановка</string>
     <string name="dialog_add_route_route_last">Конечная остановка</string>
 
     <string name="dialog_delete_route_title">Удаление маршрута</string>
-    <string name="dialog_delete_route_message">Вы уверены что хотите удалить маршрут?
+    <string name="dialog_delete_route_message">Вы уверены, что хотите удалить маршрут?
     Вместе с маршрутом удаляются также его список остановок и расписание.
+    Восстановить утерянные данные будет невозможно.</string>
+
+    <string name="dialog_add_stop_title">Добавление остановки</string>
+    <string name="dialog_add_stop_name">Название остановки</string>
+    <string name="dialog_add_stop_order">Порядок остановки по маршруту</string>
+
+    <string name="dialog_delete_stop_title">Удаление остановки</string>
+    <string name="dialog_delete_stop_message">Вы уверены, что хотите удалить остановку?
+    Вместе с остановкой удаляется также её расписание.
     Восстановить утерянные данные будет невозможно.</string>
 </resources>

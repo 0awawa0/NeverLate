@@ -17,13 +17,15 @@ import com.awawa.neverlate.utils.toast
 import kotlinx.android.synthetic.main.fragment_routes.*
 import kotlinx.coroutines.*
 
+const val ARGUMENT_TRANSPORT_ID = "transportId"
 
 class RoutesFragment : Fragment(), RVItemClickListener {
 
     private lateinit var root: View
     private val adapter: RoutesAdapter = RoutesAdapter(this)
-    private val presenter: RoutesPresenter = RoutesPresenter(this)
-    private var transportId: Int = 0
+
+    var presenter: RoutesPresenter = RoutesPresenter(this)
+    val transportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID) }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,9 +38,16 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
         rvRoutes.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
+        rvRoutes.setHasFixedSize(true)
         rvRoutes.adapter = adapter
-        transportId = arguments!!.get("transportId") as Int
         presenter.getRoutes(transportId)
+
+        (requireActivity() as MainActivity).registerMenuItemSelectCallback(object : MainActivity.MenuItemSelectCallback {
+            override fun onItemSelected(item: MenuItem): Boolean {
+                showAddNewRouteDialog()
+                return true
+            }
+        })
         return root
     }
 
@@ -52,6 +61,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
     override fun onClick(view: View) {
         val args = Bundle()
         args.putInt(ARGUMENT_ROUTE_ID, view.id)
+        args.putInt(ARGUMENT_TRANSPORT_ID, transportId)
         ((requireActivity() as MainActivity).navController).navigate(R.id.nav_stops, args)
     }
 
@@ -83,8 +93,4 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         )
         return true
     }
-
-
-    fun addNewRoute() {showAddNewRouteDialog()}
-    fun deleteRoute(routeId: Int) { presenter.deleteRoute(routeId, transportId) }
 }
