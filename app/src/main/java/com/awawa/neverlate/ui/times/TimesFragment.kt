@@ -9,9 +9,14 @@ import android.view.View.VISIBLE
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
+import com.awawa.neverlate.MainActivity
 import com.awawa.neverlate.R
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
+import com.awawa.neverlate.ui.routes.ARGUMENT_TRANSPORT_ID
+import com.awawa.neverlate.utils.showAddNewTimeDialog
+import com.awawa.neverlate.utils.showChangeTimeDialog
+import com.awawa.neverlate.utils.showDeleteTimeDialog
 import com.awawa.neverlate.utils.toast
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_times.*
@@ -26,9 +31,14 @@ const val ARGUMENT_STOP_ID = "stopId"
 class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickListener {
 
     private lateinit var root: View
-    private val presenter = TimesPresenter(this)
     private val adapter = TimesAdapter(this)
-    private val stopId by lazy { arguments!!.getInt(ARGUMENT_STOP_ID)}
+
+    val presenter = TimesPresenter(this)
+
+    val stopId by lazy { arguments!!.getInt(ARGUMENT_STOP_ID)}
+    val trasnportId by lazy { arguments!!.getInt(ARGUMENT_TRANSPORT_ID)}
+    val tabLayout: TabLayout by lazy { root.findViewById<TabLayout>(R.id.tabLayout) }
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -42,6 +52,13 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         root.rvTimes.adapter = adapter
         root.tabLayout.addOnTabSelectedListener(this)
         presenter.getTimeTable(stopId, false)
+
+        (requireActivity() as MainActivity).registerMenuItemSelectCallback(object: MainActivity.MenuItemSelectCallback {
+            override fun onItemSelected(item: MenuItem): Boolean {
+                showAddNewTimeDialog()
+                return true
+            }
+        })
         return root
     }
 
@@ -49,7 +66,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         loadingPanel.visibility = VISIBLE
-        presenter.getTimeTable(stopId, p0!!.parent.selectedTabPosition == 1)
+        presenter.getTimeTable(stopId, p0!!.parent!!.selectedTabPosition == 1)
     }
 
     override fun onTabUnselected(p0: TabLayout.Tab?) {}
@@ -64,10 +81,32 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         menuInfo: ContextMenu.ContextMenuInfo?,
         position: Int
     ) {
-        toast(requireContext(), "onCreateContextMenu", Toast.LENGTH_SHORT)
+        menu.add(
+            2,
+            v.id,
+            0,
+            getString(R.string.delete)
+        )
+        menu.add(
+            2,
+            v.id,
+            1,
+            getString(R.string.change)
+        )
     }
 
-    suspend fun updateTimeTable(times: List<Entities.NewTimes>) {
+
+    override fun onContextItemSelected(item: MenuItem): Boolean {
+        if (item.order == 0) showDeleteTimeDialog(item.itemId)
+        if (item.order == 1) {
+            val time = adapter.getItemById(item.itemId)
+            if (time != null)
+                showChangeTimeDialog(time)
+        }
+        return super.onContextItemSelected(item)
+    }
+
+    suspend fun updateTimeTable(times: List<Entities.Times>) {
         withContext(Dispatchers.Main) {
             adapter.updateTimeTable(times)
             loadingPanel.visibility = GONE

@@ -12,12 +12,18 @@ import com.awawa.neverlate.ui.custom_views.TimeView
 class TimesAdapter(private val clickListener: RVItemClickListener)
     : RecyclerView.Adapter<TimesAdapter.TimesViewHolder>() {
 
-    private val dataSet = ArrayList<Entities.NewTimes>()
+    private val dataSet = ArrayList<Entities.Times>()
 
-    fun updateTimeTable(times: List<Entities.NewTimes>) {
+    fun updateTimeTable(times: List<Entities.Times>) {
         dataSet.clear()
         dataSet.addAll(times)
         notifyDataSetChanged()
+    }
+
+    fun getItemById(id: Int): Entities.Times? {
+        for (item in dataSet)
+            if (item._id == id) return item
+        return null
     }
 
 

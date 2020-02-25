@@ -56,12 +56,21 @@ class Daos {
     interface TimesDao {
 
         @Insert
-        fun putTime(time: Entities.NewTimes)
+        fun putTime(time: Entities.Times)
 
         @Query("SELECT * FROM times WHERE StopID == :stopId AND Weekend == :weekend ORDER BY StopTime")
-        fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.NewTimes>
+        fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.Times>
 
         @Query("DELETE FROM times WHERE StopID == :stopId")
         fun deleteTimetableForStop(stopId: Int)
+
+        @Query("SELECT * FROM times WHERE stopTime == :time AND stopId == :stopId")
+        fun checkTime(stopId: Int, time: Int): Entities.Times?
+
+        @Query("DELETE FROM times WHERE _id == :id")
+        fun deleteTime(id: Int)
+
+        @Update
+        fun updateTime(time: Entities.Times)
     }
 }

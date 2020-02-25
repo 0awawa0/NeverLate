@@ -33,6 +33,9 @@
     <string name="add_stop">Добавить остановку</string>
     <string name="delete_stop">Удалить остановку</string>
 
+    <string name="delete">Удалить</string>
+    <string name="change">Изменить</string>
+
     <string name="dialog_add_route_title">Добавление нового маршрута</string>
     <string name="dialog_add_route_route_number">Номер маршрута</string>
     <string name="dialog_add_route_route_first">Начальная остановка</string>
@@ -51,4 +54,13 @@
     <string name="dialog_delete_stop_message">Вы уверены, что хотите удалить остановку?
     Вместе с остановкой удаляется также её расписание.
     Восстановить утерянные данные будет невозможно.</string>
+
+    <string name="dialog_add_time_title">Добавление времени</string>
+    <string name="dialog_add_time_time">Время</string>
+    <string name="dialog_add_time_night">Ночное время</string>
+
+    <string name="dialog_delete_time_title">Удаление времени</string>
+    <string name="dialog_delete_time_message">Вы уверены?</string>
+
+    <string name="dialog_change_time_title">Изменение времени</string>
 </resources>

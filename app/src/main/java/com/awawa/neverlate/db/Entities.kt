@@ -30,7 +30,7 @@ class Entities {
     )
 
     @Entity(tableName = "times")
-    data class NewTimes(
+    data class Times(
         @ColumnInfo(name = "StopTime") var stopTime: Int = 0,
         @ColumnInfo(name = "StopID") var stopId: Int = 0,
         @ColumnInfo(name = "Night") var night: Int = 0,

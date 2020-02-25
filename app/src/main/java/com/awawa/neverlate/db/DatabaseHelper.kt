@@ -39,6 +39,10 @@ class DatabaseHelper() {
         fun checkStopId(stopId: Int): Boolean {
             return instance.database.stopsDao().checkStop(stopId) != null
         }
+
+        fun checkTime(stopId: Int, time: Int): Boolean {
+            return instance.database.timesDao().checkTime(stopId, time) != null
+        }
     }
 
     private lateinit var database: Database

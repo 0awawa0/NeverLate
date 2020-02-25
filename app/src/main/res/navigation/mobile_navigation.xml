@@ -73,6 +73,10 @@
             android:name="stopId"
             app:argType="integer"
             android:defaultValue="1"/>
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="1"/>
     </fragment>
 
 </navigation>
