@@ -8,19 +8,31 @@
 
     <color name="home_background">#e6daed</color>
 
-    <color name="gradient_color_one">#fcbe03</color>
-    <color name="gradient_color_two">#a903fc</color>
-    <color name="gradient_color_three">#fc3503</color>
+    <color name="gradient_color_bus_one">#0ba4db</color>
+    <color name="gradient_color_bus_two">#63b6d4</color>
+    <color name="gradient_color_bus_three">#9dc5d4</color>
+
+    <color name="gradient_color_tram_one">#db1818</color>
+    <color name="gradient_color_tram_two">#db4242</color>
+    <color name="gradient_color_tram_three">#de8383</color>
+
+    <color name="gradient_color_trolley_one">#b80dde</color>
+    <color name="gradient_color_trolley_two">#c864de</color>
+    <color name="gradient_color_trolley_three">#cf97db</color>
+
+    <color name="gradient_color_marsh_one">#37ad13</color>
+    <color name="gradient_color_marsh_two">#82db65</color>
+    <color name="gradient_color_marsh_three">#b9d6b0</color>
 
     <color name="colorTram">#fc0303</color>
-    <color name="colorTramBackground">#d1aeaf</color>
+    <color name="colorTramBackground">#de8383</color>
 
     <color name="colorTrolley">#ad1aa1</color>
-    <color name="colorTrolleyBackground">#d1aecf</color>
+    <color name="colorTrolleyBackground">#cf97db</color>
 
-    <color name="colorBus">#132dad</color>
-    <color name="colorBusBackground">#b0aed1</color>
+    <color name="colorBus">#0ba4db</color>
+    <color name="colorBusBackground">#9dc5d4</color>
 
     <color name="colorMarsh">#37ad13</color>
-    <color name="colorMarshBackground">#b6d1ae</color>
+    <color name="colorMarshBackground">#b9d6b0</color>
 </resources>

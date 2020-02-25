@@ -16,6 +16,7 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.awawa.neverlate.utils.isMarshmallowOrHigher
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlinx.android.synthetic.main.app_bar_main.*
 
 
 class MainActivity : AppCompatActivity(R.layout.activity_main),
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         R.id.nav_marsh to R.color.item_marsh
     )
 
+    private val destinationToBackground = mapOf(
+        R.id.nav_tram to R.drawable.background_toolbar_tram,
+        R.id.nav_trolley to R.drawable.background_toolbar_trolley,
+        R.id.nav_bus to R.drawable.background_toolbar_bus,
+        R.id.nav_marsh to R.drawable.background_toolbar_marsh
+    )
+
     private var menuItemSelectCallback: MenuItemSelectCallback? = null
 
 
@@ -39,10 +47,6 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
         super.onCreate(savedInstanceState)
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
-        val animationDrawable = toolbar.background as AnimationDrawable
-        animationDrawable.setEnterFadeDuration(10)
-        animationDrawable.setExitFadeDuration(2500)
-        animationDrawable.start()
         setSupportActionBar(toolbar)
 
         navController = findNavController(R.id.nav_host_fragment)
@@ -80,6 +84,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
                 )
                 bottom_nav_view.itemTextColor = bottom_nav_view.itemIconTintList
             }
+            toolbar.background = getDrawable(destinationToBackground.getValue(destination.id))
         } else { return }
     }
 
