@@ -1,6 +1,8 @@
 package com.awawa.neverlate
 
 
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +13,8 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
 import com.awawa.neverlate.db.TRANSPORT_ID_BUS
@@ -36,6 +40,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     private lateinit var appBarConfiguration: AppBarConfiguration
     lateinit var navController: NavController
 
+    private val permissions = arrayOf(Manifest.permission.SET_ALARM, Manifest.permission.WAKE_LOCK)
+
     private val destinationToColorMap = mapOf(
         R.id.nav_tram to R.color.item_tram,
         R.id.nav_trolley to R.color.item_trolley,
@@ -58,6 +64,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
 
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
+
+        checkPermissions()
 
         navController = findNavController(R.id.nav_host_fragment)
 
@@ -118,6 +126,15 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
 
     fun registerMenuItemSelectCallback(callback: MenuItemSelectCallback?) {
         this.menuItemSelectCallback = callback
+    }
+
+
+    private fun checkPermissions() {
+        for (permission in permissions) {
+            if (ContextCompat.checkSelfPermission(this, permission) != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this, permissions, 777)
+            }
+        }
     }
 
 

@@ -7,6 +7,7 @@ import android.app.PendingIntent
 import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import com.awawa.neverlate.R
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.times.TimesFragment
@@ -81,9 +82,7 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
             val currentDate = Calendar.getInstance()
             val dueDate = Calendar.getInstance()
 
-            dueDate.set(Calendar.HOUR_OF_DAY, hours)
-            dueDate.set(Calendar.MINUTE, minutes)
-            dueDate.set(Calendar.SECOND, 0)
+            dueDate.add(Calendar.MINUTE, 1)
 
             if (dueDate.before(currentDate)) { dueDate.add(Calendar.HOUR_OF_DAY, 24) }
 
@@ -95,6 +94,7 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
                     requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
                     )
 
+            Log.e("tag", "Current time: ${Date().time} Time: ${dueDate.timeInMillis} Difference: ${dueDate.timeInMillis - Date().time}")
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
                 alarmManager.setExactAndAllowWhileIdle(
                     AlarmManager.RTC_WAKEUP,

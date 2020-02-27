@@ -46,6 +46,8 @@ fun toast(context: Context, text: String, duration: Int) {
 
 
 fun showNotification(context: Context) {
+    createNotificationChannel(context)
+
     val notificationIntent = Intent(context, MainActivity::class.java)
     val pendingIntent = PendingIntent.getActivity(
         context,
@@ -68,7 +70,7 @@ fun showNotification(context: Context) {
 fun createNotificationChannel(context: Context) {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val notificationChannel = NotificationChannel(
-            "neverlate_notification_channel",
+            NOTIFICATION_CHANNEL_ID,
             context.getString(R.string.notification_message),
             NotificationManager.IMPORTANCE_HIGH)
 
