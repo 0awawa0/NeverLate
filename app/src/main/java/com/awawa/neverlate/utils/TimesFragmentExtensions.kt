@@ -82,7 +82,9 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
             val currentDate = Calendar.getInstance()
             val dueDate = Calendar.getInstance()
 
-            dueDate.add(Calendar.MINUTE, 1)
+            dueDate.set(Calendar.HOUR_OF_DAY, hours)
+            dueDate.set(Calendar.MINUTE, minutes)
+            dueDate.set(Calendar.SECOND, 0)
 
             if (dueDate.before(currentDate)) { dueDate.add(Calendar.HOUR_OF_DAY, 24) }
 
