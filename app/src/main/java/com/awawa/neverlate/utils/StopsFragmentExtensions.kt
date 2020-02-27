@@ -21,6 +21,7 @@ fun StopsFragment.showDeleteStopDialog(stopId: Int) {
         .show()
 }
 
+
 fun StopsFragment.showAddStopDialog() {
     val view = layoutInflater.inflate(R.layout.layout_dialog_add_stop, null, false)
     AlertDialog.Builder(requireContext())

@@ -3,17 +3,9 @@ package com.awawa.neverlate.utils
 import android.app.AlertDialog
 import android.view.LayoutInflater
 import android.widget.Toast
-import androidx.navigation.fragment.findNavController
 import com.awawa.neverlate.R
-import com.awawa.neverlate.db.DatabaseHelper
-import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.routes.RoutesFragment
 import kotlinx.android.synthetic.main.layout_dialog_add_route.view.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
-import java.util.*
 
 
 fun RoutesFragment.showDeleteRouteDialog(routeId: Int) {

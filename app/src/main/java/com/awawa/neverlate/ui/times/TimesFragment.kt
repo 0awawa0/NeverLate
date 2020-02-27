@@ -15,10 +15,7 @@ import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.transportIdToColorMap
 import com.awawa.neverlate.ui.routes.ARGUMENT_TRANSPORT_ID
-import com.awawa.neverlate.utils.showAddNewTimeDialog
-import com.awawa.neverlate.utils.showChangeTimeDialog
-import com.awawa.neverlate.utils.showDeleteTimeDialog
-import com.awawa.neverlate.utils.toast
+import com.awawa.neverlate.utils.*
 import com.google.android.material.tabs.TabLayout
 import kotlinx.android.synthetic.main.fragment_times.*
 import kotlinx.android.synthetic.main.fragment_times.view.*
@@ -64,18 +61,22 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         return root
     }
 
+
     override fun onTabReselected(p0: TabLayout.Tab?) {}
+
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
         loadingPanel.visibility = VISIBLE
         presenter.getTimeTable(stopId, p0!!.parent!!.selectedTabPosition == 1)
     }
 
+
     override fun onTabUnselected(p0: TabLayout.Tab?) {}
 
+
     override fun onClick(view: View) {
-        toast(requireContext(), "Click", Toast.LENGTH_SHORT)
     }
+
 
     override fun onCreateContextMenu(
         menu: ContextMenu,
@@ -87,7 +88,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
             2,
             v.id,
             0,
-            getString(R.string.delete)
+            getString(R.string.notify)
         )
         menu.add(
             2,
@@ -95,18 +96,34 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
             1,
             getString(R.string.change)
         )
+        menu.add(
+            2,
+            v.id,
+            2,
+            getString(R.string.delete)
+        )
     }
 
 
     override fun onContextItemSelected(item: MenuItem): Boolean {
-        if (item.order == 0) showDeleteTimeDialog(item.itemId)
-        if (item.order == 1) {
-            val time = adapter.getItemById(item.itemId)
-            if (time != null)
-                showChangeTimeDialog(time)
+
+        when (item.order) {
+            0 -> {
+                showNotifyTimeDialog(time = adapter.getItemById(item.itemId)!!)
+            }
+            1 -> {
+                val time = adapter.getItemById(item.itemId)
+                if (time != null)
+                    showChangeTimeDialog(time)
+            }
+            2 -> {
+                showDeleteTimeDialog(item.itemId)
+            }
+
         }
         return super.onContextItemSelected(item)
     }
+
 
     suspend fun updateTimeTable(times: List<Entities.Times>) {
         withContext(Dispatchers.Main) {
@@ -116,6 +133,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
             else tvTimesError.visibility = GONE
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         toast(

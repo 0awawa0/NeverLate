@@ -11,6 +11,7 @@ import java.util.*
 
 class StopsPresenter(private val view: StopsFragment) {
 
+
     fun getStops(routeId: Int) {
         GlobalScope.launch(Dispatchers.IO) {
             view.updateData(
@@ -18,6 +19,7 @@ class StopsPresenter(private val view: StopsFragment) {
             )
         }
     }
+
 
     fun deleteStop(stopId: Int) {
         GlobalScope.launch {
@@ -42,6 +44,7 @@ class StopsPresenter(private val view: StopsFragment) {
             ))
         }
     }
+
 
     fun addStop(stopName: String, stopNumber: Int) {
         GlobalScope.launch {

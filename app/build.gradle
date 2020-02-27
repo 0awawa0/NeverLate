@@ -43,7 +43,9 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.2.1'
     implementation 'androidx.navigation:navigation-ui-ktx:2.2.1'
 
-    implementation 'ru.egslava:MaskedEditText:1.0.5'
+    def work_version = "2.3.2"
+    implementation "androidx.work:work-runtime-ktx:$work_version"
+
 
     // Room persistence library dependencies
     def room_version = "2.2.4"
@@ -54,6 +56,8 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
+
+    implementation 'ru.egslava:MaskedEditText:1.0.5'
 
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'androidx.test.ext:junit:1.1.1'

@@ -19,6 +19,7 @@ class TimesPresenter(private val view: TimesFragment) {
         }
     }
 
+
     fun addNewTime(time: Int, night: Boolean) {
         GlobalScope.launch {
             val database = DatabaseHelper.getDatabase(view.requireContext())
@@ -38,6 +39,7 @@ class TimesPresenter(private val view: TimesFragment) {
             }
         }
     }
+
 
     fun deleteTime(timeId: Int) {
         GlobalScope.launch {

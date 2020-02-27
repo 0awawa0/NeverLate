@@ -42,6 +42,7 @@ class RoutesAdapter(private val clickListener: RVItemClickListener)
 
     override fun getItemCount(): Int { return dataSet.size }
 
+
     inner class RoutesViewHolder(val view: RouteView): RecyclerView.ViewHolder(view) {
         init {
             view.setOnClickListener { view -> run { clickListener.onClick(view) }}

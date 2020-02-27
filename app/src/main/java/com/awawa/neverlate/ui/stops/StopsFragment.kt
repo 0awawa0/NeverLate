@@ -95,6 +95,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         )
     }
 
+
     override fun onContextItemSelected(item: MenuItem): Boolean {
         if (item.order == 0) showDeleteStopDialog(item.itemId)
         return super.onContextItemSelected(item)
@@ -109,6 +110,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
             else tvStopsError.visibility = View.GONE
         }
     }
+
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         toast(

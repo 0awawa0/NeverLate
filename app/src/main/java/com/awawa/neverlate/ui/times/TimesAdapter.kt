@@ -14,11 +14,13 @@ class TimesAdapter(private val clickListener: RVItemClickListener)
 
     private val dataSet = ArrayList<Entities.Times>()
 
+
     fun updateTimeTable(times: List<Entities.Times>) {
         dataSet.clear()
         dataSet.addAll(times)
         notifyDataSetChanged()
     }
+
 
     fun getItemById(id: Int): Entities.Times? {
         for (item in dataSet)

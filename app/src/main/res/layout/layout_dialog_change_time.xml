@@ -7,28 +7,17 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
+        style="@style/DialogTitleStyle"
         android:text="@string/dialog_change_time_title"/>
 
     <TextView
         android:id="@+id/tvTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:paddingStart="10dp"
-        android:textColor="@android:color/black"
+        style="@style/DialogTextViewStyle"
         android:text="@string/dialog_add_time_time"/>
 
     <br.com.sapereaude.maskedEditText.MaskedEditText
         android:id="@+id/etTime"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
+        style="@style/DialogEditTextStyle"
         app:mask="##:##"
         android:hint="0000"
         app:keep_hint="true"

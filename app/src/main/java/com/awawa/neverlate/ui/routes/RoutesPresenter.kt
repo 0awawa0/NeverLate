@@ -13,12 +13,14 @@ class RoutesPresenter(private val view: RoutesFragment) {
 
     private val tag = "RoutesPresenter"
 
+
     fun getRoutes(transportId: Int) {
         GlobalScope.launch(Dispatchers.IO) {
             view.updateData(DatabaseHelper.getDatabase(view.requireContext()).routesDao()
                 .getRoutes(transportId))
         }
     }
+
 
     fun deleteRoute(routeId: Int, transportId: Int) {
         GlobalScope.launch {

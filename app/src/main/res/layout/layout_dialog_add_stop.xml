@@ -5,44 +5,26 @@
 
     <TextView
         android:id="@+id/tvTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="15dp"
-        android:textSize="24sp"
-        android:textColor="@android:color/black"
+        style="@style/DialogTitleStyle"
         android:text="@string/dialog_add_stop_title"/>
 
     <TextView
         android:id="@+id/tvStopName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:paddingStart="10dp"
-        android:textColor="@android:color/black"
+        style="@style/DialogTextViewStyle"
         android:text="@string/dialog_add_stop_name"/>
 
     <EditText
         android:id="@+id/etStopName"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"/>
+        style="@style/DialogEditTextStyle"/>
 
     <TextView
         android:id="@+id/tvStopOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/dialog_add_stop_order"
-        android:textSize="16sp"
-        android:paddingStart="10dp"
-        android:textColor="@android:color/black"/>
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_stop_order"/>
 
     <EditText
         android:id="@+id/etStopOrder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:textSize="16sp"
-        android:textColor="@android:color/black"
+        style="@style/DialogEditTextStyle"
         android:inputType="number"/>
 
 </LinearLayout>

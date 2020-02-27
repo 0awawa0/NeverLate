@@ -13,11 +13,13 @@ class StopsAdapter(private val clickListener: RVItemClickListener)
 
     private val dataSet = ArrayList<Entities.Stops>()
 
+
     fun updateStops(data: List<Entities.Stops>) {
         dataSet.clear()
         dataSet.addAll(data)
         notifyDataSetChanged()
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): StopsViewHolder {
         val view = StopView(parent.context, 0, "")
@@ -27,13 +29,16 @@ class StopsAdapter(private val clickListener: RVItemClickListener)
         return StopsViewHolder(view)
     }
 
+
     override fun onBindViewHolder(holder: StopsViewHolder, position: Int) {
         holder.view.id = dataSet[position].stopId
         holder.view.stopName = dataSet[position].stopName
         holder.view.transportId = dataSet[position].transportId
     }
 
+
     override fun getItemCount(): Int { return dataSet.size }
+
 
     inner class StopsViewHolder(val view: StopView): RecyclerView.ViewHolder(view) {
         init {

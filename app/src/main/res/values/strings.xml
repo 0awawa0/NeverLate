@@ -35,6 +35,7 @@
 
     <string name="delete">Удалить</string>
     <string name="change">Изменить</string>
+    <string name="notify">Напомнить</string>
 
     <string name="dialog_add_route_title">Добавление нового маршрута</string>
     <string name="dialog_add_route_route_number">Номер маршрута</string>
@@ -63,4 +64,9 @@
     <string name="dialog_delete_time_message">Вы уверены?</string>
 
     <string name="dialog_change_time_title">Изменение времени</string>
+
+    <string name="dialog_notify_time_title">Напомнить за</string>
+    <string name="dialog_notify_time_minutes">минут</string>
+
+    <string name="notification_message">Пора выходить!</string>
 </resources>
