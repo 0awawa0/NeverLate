@@ -1,13 +1,7 @@
 package com.awawa.neverlate.utils
 
 
-import android.app.AlarmManager
 import android.app.AlertDialog
-import android.app.PendingIntent
-import android.content.Context.ALARM_SERVICE
-import android.content.Intent
-import android.os.Build
-import android.util.Log
 import com.awawa.neverlate.R
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.times.TimesFragment
@@ -67,14 +61,37 @@ fun TimesFragment.showChangeTimeDialog(time: Entities.Times) {
 
 
 fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
-    val view = layoutInflater.inflate(R.layout.layout_dialog_notify_time, null, false)
-    view.npTime.value = 10
+    val view = layoutInflater.inflate(
+        R.layout.layout_dialog_notify_time,
+        null,
+        false
+    )
+
+    val notification = presenter.getNotification(time._id)
+
+    view.npTime.setOnValueChangedListener() { _, _, newVal ->  run {
+        val last = newVal.toString()[newVal.toString().lastIndex]
+        if (last == '1' && newVal != 11) {
+            view.tvMinutes.text = getString(R.string.dialog_notify_time_minutes_1)
+        } else {
+            if (last in arrayOf('2', '3', '4')
+                && newVal !in arrayOf(12, 13, 14)
+            ) {
+                view.tvMinutes.text = getString(R.string.dialog_notify_time_minutes_234)
+            } else {
+                view.tvMinutes.text= getString(R.string.dialog_notify_time_minutes)
+            }
+        }
+    }}
+    view.cbNotify.isChecked = notification != null
+    view.npTime.value = notification?.delta ?: 10
     view.npTime.maxValue = 60
     view.npTime.minValue = 0
 
     AlertDialog.Builder(requireContext())
         .setView(view)
         .setPositiveButton(android.R.string.ok) { _, _ -> run {
+
             var minutes = time.stopTime - view.npTime.value
             val hours = minutes / 60
             minutes %= 60
@@ -88,27 +105,16 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
 
             if (dueDate.before(currentDate)) { dueDate.add(Calendar.HOUR_OF_DAY, 24) }
 
-            val alarmIntent = Intent(requireContext(), AlarmReceiver::class.java).let {
-                PendingIntent.getBroadcast(requireContext(), 0, it, 0)
-            }
-
-            val alarmManager = (
-                    requireContext().getSystemService(ALARM_SERVICE) as AlarmManager
-                    )
-
-            Log.e("tag", "Current time: ${Date().time} Time: ${dueDate.timeInMillis} Difference: ${dueDate.timeInMillis - Date().time}")
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                alarmManager.setExactAndAllowWhileIdle(
-                    AlarmManager.RTC_WAKEUP,
+            if (view.cbNotify.isChecked) {
+                presenter.setNotification(
+                    time._id,
                     dueDate.timeInMillis,
-                    alarmIntent
+                    view.npTime.value,
+                    view.cbDaily.isChecked,
+                    notification
                 )
             } else {
-                alarmManager.setExact(
-                    AlarmManager.RTC_WAKEUP,
-                    dueDate.timeInMillis,
-                    alarmIntent
-                )
+                presenter.removeNotification(time._id)
             }
         }}
         .setNegativeButton(android.R.string.cancel) { _, _ -> run {

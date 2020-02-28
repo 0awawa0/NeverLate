@@ -37,7 +37,7 @@ class DatabaseHelper() {
         }
 
         fun checkStopId(stopId: Int): Boolean {
-            return instance.database.stopsDao().checkStop(stopId) != null
+            return instance.database.stopsDao().getStop(stopId) != null
         }
 
         fun checkTime(stopId: Int, time: Int): Boolean {
@@ -51,6 +51,7 @@ class DatabaseHelper() {
         if (!::database.isInitialized){
             database = Room.databaseBuilder(context, Database::class.java, databaseName)
                 .allowMainThreadQueries()
+                .addMigrations(migration1_2)
                 .createFromAsset(assetDatabaseFile)
                 .build()
         }

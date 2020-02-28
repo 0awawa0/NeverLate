@@ -28,7 +28,7 @@ class StopsPresenter(private val view: StopsFragment) {
             val stops = database.stopsDao().getAllStops(
                 view.routeId + view.tabLayout.selectedTabPosition
             )
-            val stopToDelete = database.stopsDao().checkStop(stopId)
+            val stopToDelete = database.stopsDao().getStop(stopId)
             for (i in stops.indices) {
                 if (stops[i].stopNumber == stopToDelete!!.stopNumber) {
                     for (j in i + 1 until stops.size) {

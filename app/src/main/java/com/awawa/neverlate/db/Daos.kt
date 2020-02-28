@@ -8,8 +8,12 @@ class Daos {
 
     @Dao
     interface RouteDao {
-        @Query("SELECT * FROM routes WHERE TransportID == :id AND Reverse == 0 ORDER BY RouteNumber")
-        fun getRoutes(id: Int): List<Entities.Routes>
+
+        @Query("SELECT * FROM routes WHERE routeId == :routeId")
+        fun getRoute(routeId: Int): Entities.Routes?
+
+        @Query("SELECT * FROM routes WHERE TransportID == :transportId AND Reverse == 0 ORDER BY RouteNumber")
+        fun getRoutes(transportId: Int): List<Entities.Routes>
 
         @Query("SELECT * FROM routes")
         fun getAllRoutes(): List<Entities.Routes>
@@ -42,7 +46,7 @@ class Daos {
         fun deleteStop(stopId: Int)
 
         @Query("SELECT * FROM stops WHERE stopId == :stopId")
-        fun checkStop(stopId: Int): Entities.Stops?
+        fun getStop(stopId: Int): Entities.Stops?
 
         @Update
         fun updateStop(stop: Entities.Stops)
@@ -58,6 +62,9 @@ class Daos {
         @Insert
         fun putTime(time: Entities.Times)
 
+        @Query("SELECT * FROM times WHERE _id == :timeId")
+        fun getTime(timeId: Int): Entities.Times?
+
         @Query("SELECT * FROM times WHERE StopID == :stopId AND Weekend == :weekend ORDER BY StopTime")
         fun getTimeTable(stopId: Int, weekend: Boolean): List<Entities.Times>
 
@@ -72,5 +79,22 @@ class Daos {
 
         @Update
         fun updateTime(time: Entities.Times)
+    }
+
+
+    @Dao
+    interface NotificationsDao {
+
+        @Query("SELECT * FROM notifications WHERE timeId == :timeId")
+        fun getByTimeId(timeId: Int): Entities.Notifications?
+
+        @Query("DELETE FROM notifications WHERE timeId == :timeId")
+        fun deleteByTimeId(timeId: Int)
+
+        @Insert
+        fun addNotification(notification: Entities.Notifications)
+
+        @Delete
+        fun deleteNotification(notification: Entities.Notifications)
     }
 }

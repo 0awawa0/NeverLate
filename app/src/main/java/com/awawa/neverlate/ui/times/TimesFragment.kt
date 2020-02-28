@@ -88,7 +88,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
             2,
             v.id,
             0,
-            getString(R.string.notify)
+            getString(R.string.schedule_notification)
         )
         menu.add(
             2,

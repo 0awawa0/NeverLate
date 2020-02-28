@@ -35,7 +35,7 @@
 
     <string name="delete">Удалить</string>
     <string name="change">Изменить</string>
-    <string name="notify">Напомнить</string>
+    <string name="schedule_notification">Настроить напоминание</string>
 
     <string name="dialog_add_route_title">Добавление нового маршрута</string>
     <string name="dialog_add_route_route_number">Номер маршрута</string>
@@ -67,6 +67,10 @@
 
     <string name="dialog_notify_time_title">Напомнить за</string>
     <string name="dialog_notify_time_minutes">минут</string>
+    <string name="dialog_notify_time_minutes_1">минуту</string>
+    <string name="dialog_notify_time_minutes_234">минуты</string>
 
     <string name="notification_message">Пора выходить!</string>
+    <string name="set_notify">Установлено</string>
+    <string name="daily">Ежедневно</string>
 </resources>
