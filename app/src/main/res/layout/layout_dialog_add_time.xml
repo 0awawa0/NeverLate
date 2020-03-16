@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/DialogTitleStyle"
+        android:text="@string/dialog_add_time_title"/>
+
+    <TextView
+        android:id="@+id/tvTime"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_time_time"/>
+
+    <br.com.sapereaude.maskedEditText.MaskedEditText
+        android:id="@+id/etTime"
+        style="@style/DialogEditTextStyle"
+        app:mask="##:##"
+        android:hint="0000"
+        app:keep_hint="true"
+        android:inputType="time"/>
+
+    <CheckBox
+        android:id="@+id/cbNight"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/dialog_add_time_night"/>
+
+</LinearLayout>

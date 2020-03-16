@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/DialogTitleStyle"
+        android:text="@string/dialog_add_stop_title"/>
+
+    <TextView
+        android:id="@+id/tvStopName"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_stop_name"/>
+
+    <EditText
+        android:id="@+id/etStopName"
+        style="@style/DialogEditTextStyle"/>
+
+    <TextView
+        android:id="@+id/tvStopOrder"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_stop_order"/>
+
+    <EditText
+        android:id="@+id/etStopOrder"
+        style="@style/DialogEditTextStyle"
+        android:inputType="number"/>
+
+</LinearLayout>

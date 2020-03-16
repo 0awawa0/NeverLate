@@ -1,16 +1,22 @@
 package com.awawa.neverlate.db
 
+
 import android.content.Context
-import android.util.Log
 import androidx.room.Room
-import androidx.room.migration.Migration
-import androidx.sqlite.db.SupportSQLiteDatabase
+
+
+const val assetDatabaseFile = "database/database.db"
+const val databaseName = "NeverlateDB"
+
+const val TRANSPORT_ID_TRAM = 1
+const val TRANSPORT_ID_TROLLEY = 2
+const val TRANSPORT_ID_BUS = 3
+const val TRANSPORT_ID_MARSH = 4
+
 
 class DatabaseHelper() {
 
-    private val TAG = "DatabaseHelper"
-    private val databaseName = "NeverLateDB"
-    private val assetDatabaseFile = "database/database.db"
+    private val tag = "DatabaseHelper"
 
     companion object {
         private lateinit var instance : DatabaseHelper
@@ -22,8 +28,20 @@ class DatabaseHelper() {
             return instance
         }
 
-        public fun getDatabase(context: Context) : Database {
+        fun getDatabase(context: Context) : Database {
             return getInstance(context).database
+        }
+
+        fun checkRouteId(routeId: Int): Boolean {
+            return instance.database.routesDao().checkRoute(routeId) != null
+        }
+
+        fun checkStopId(stopId: Int): Boolean {
+            return instance.database.stopsDao().getStop(stopId) != null
+        }
+
+        fun checkTime(stopId: Int, time: Int): Boolean {
+            return instance.database.timesDao().checkTime(stopId, time) != null
         }
     }
 
@@ -33,9 +51,7 @@ class DatabaseHelper() {
         if (!::database.isInitialized){
             database = Room.databaseBuilder(context, Database::class.java, databaseName)
                 .allowMainThreadQueries()
-                .addMigrations(object: Migration(3, 4) {
-                    override fun migrate(database: SupportSQLiteDatabase) {}
-                })
+                .addMigrations(migration1_2)
                 .createFromAsset(assetDatabaseFile)
                 .build()
         }

@@ -11,9 +11,11 @@ class PreCachedLayoutManager(context: Context, private var extraLayoutSpace: Int
 
     private val defaultExtraLayoutSpace = 2000
 
+
     fun setExtraLayoutSpace(extraLayoutSpace: Int) {
         this.extraLayoutSpace = extraLayoutSpace
     }
+
 
     override fun getExtraLayoutSpace(state: RecyclerView.State?): Int {
         return if (extraLayoutSpace < 0) defaultExtraLayoutSpace else extraLayoutSpace

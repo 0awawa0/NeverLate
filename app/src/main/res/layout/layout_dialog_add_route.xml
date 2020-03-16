@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/tvTitle"
+        style="@style/DialogTitleStyle"
+        android:text="@string/dialog_add_route_title"/>
+
+    <TextView
+        android:id="@+id/tvRouteNumber"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_route_route_number"/>
+
+    <EditText
+        android:id="@+id/etRouteNumber"
+        style="@style/DialogEditTextStyle" />
+
+    <TextView
+        android:id="@+id/tvRouteFirst"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_route_route_first" />
+
+    <EditText
+        android:id="@+id/etRouteFirst"
+        style="@style/DialogEditTextStyle"/>
+
+    <TextView
+        android:id="@+id/tvRouteLast"
+        style="@style/DialogTextViewStyle"
+        android:text="@string/dialog_add_route_route_last"/>
+
+    <EditText
+        android:id="@+id/etRouteLast"
+        style="@style/DialogEditTextStyle"/>
+
+</LinearLayout>

@@ -24,4 +24,53 @@
 
     <string name="weekdays">Будний день</string>
     <string name="weekends">Выходной</string>
+
+    <string name="error_no_data">Нет данных</string>
+
+    <string name="add_route">Добавить маршрут</string>
+    <string name="delete_route">Удалить маршрут</string>
+
+    <string name="add_stop">Добавить остановку</string>
+    <string name="delete_stop">Удалить остановку</string>
+
+    <string name="delete">Удалить</string>
+    <string name="change">Изменить</string>
+    <string name="schedule_notification">Настроить напоминание</string>
+
+    <string name="dialog_add_route_title">Добавление нового маршрута</string>
+    <string name="dialog_add_route_route_number">Номер маршрута</string>
+    <string name="dialog_add_route_route_first">Начальная остановка</string>
+    <string name="dialog_add_route_route_last">Конечная остановка</string>
+
+    <string name="dialog_delete_route_title">Удаление маршрута</string>
+    <string name="dialog_delete_route_message">Вы уверены, что хотите удалить маршрут?
+    Вместе с маршрутом удаляются также его список остановок и расписание.
+    Восстановить утерянные данные будет невозможно.</string>
+
+    <string name="dialog_add_stop_title">Добавление остановки</string>
+    <string name="dialog_add_stop_name">Название остановки</string>
+    <string name="dialog_add_stop_order">Порядок остановки по маршруту</string>
+
+    <string name="dialog_delete_stop_title">Удаление остановки</string>
+    <string name="dialog_delete_stop_message">Вы уверены, что хотите удалить остановку?
+    Вместе с остановкой удаляется также её расписание.
+    Восстановить утерянные данные будет невозможно.</string>
+
+    <string name="dialog_add_time_title">Добавление времени</string>
+    <string name="dialog_add_time_time">Время</string>
+    <string name="dialog_add_time_night">Ночное время</string>
+
+    <string name="dialog_delete_time_title">Удаление времени</string>
+    <string name="dialog_delete_time_message">Вы уверены?</string>
+
+    <string name="dialog_change_time_title">Изменение времени</string>
+
+    <string name="dialog_notify_time_title">Напомнить за</string>
+    <string name="dialog_notify_time_minutes">минут</string>
+    <string name="dialog_notify_time_minutes_1">минуту</string>
+    <string name="dialog_notify_time_minutes_234">минуты</string>
+
+    <string name="notification_message">Пора выходить!</string>
+    <string name="set_notify">Установлено</string>
+    <string name="daily">Ежедневно</string>
 </resources>

@@ -22,6 +22,18 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvTimes"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
+    <include android:id="@+id/loadingPanel" layout="@layout/layout_loading_panel"/>
+
+    <TextView
+        android:id="@+id/tvTimesError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/error_no_data"
+        android:textAlignment="center"
+        android:textColor="@android:color/black"
+        android:visibility="gone"
+        android:textSize="28sp"/>
 
 </LinearLayout>

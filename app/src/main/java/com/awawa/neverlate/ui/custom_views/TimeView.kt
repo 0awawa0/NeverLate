@@ -1,14 +1,15 @@
 package com.awawa.neverlate.ui.custom_views
 
+
 import android.content.Context
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
 import com.awawa.neverlate.R
 
+
 class TimeView(context: Context,
                time: String,
-               interval: Int,
                night: Int,
                transportId: Int): LinearLayout(context) {
 
@@ -18,9 +19,14 @@ class TimeView(context: Context,
             tvTime.text = value
         }
 
-    var interval = interval
-
     var night = night
+        set(value) {
+            field = value
+            if (value == 1) {
+                view.background =
+                    context.resources.getDrawable(R.drawable.background_night_route_view)
+            }
+        }
 
     var transportId = transportId
         set(value) {

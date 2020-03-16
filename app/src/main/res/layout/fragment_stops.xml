@@ -22,6 +22,19 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvStops"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content" />
+
+    <include android:id="@+id/loadingPanel" layout="@layout/layout_loading_panel"/>
+
+    <TextView
+        android:id="@+id/tvStopsError"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        android:text="@string/error_no_data"
+        android:textSize="28sp"
+        android:textColor="@android:color/black"
+        android:textAlignment="center"/>
+
 
 </LinearLayout>

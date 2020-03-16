@@ -58,6 +58,10 @@
             android:name="routeId"
             app:argType="integer"
             android:defaultValue="1"/>
+        <argument
+            android:name="transportId"
+            app:argType="integer"
+            android:defaultValue="1"/>
     </fragment>
 
     <fragment
@@ -67,6 +71,10 @@
         tools:layout="@layout/fragment_times">
         <argument
             android:name="stopId"
+            app:argType="integer"
+            android:defaultValue="1"/>
+        <argument
+            android:name="transportId"
             app:argType="integer"
             android:defaultValue="1"/>
     </fragment>
