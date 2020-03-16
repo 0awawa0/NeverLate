@@ -42,11 +42,9 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     }
 
     override fun onTabReselected(p0: TabLayout.Tab?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun onTabUnselected(p0: TabLayout.Tab?) {
