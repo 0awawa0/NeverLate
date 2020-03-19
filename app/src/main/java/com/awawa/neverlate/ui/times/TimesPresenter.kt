@@ -4,16 +4,16 @@ package com.awawa.neverlate.ui.times
 import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.Context
+import android.content.Context.ALARM_SERVICE
 import android.content.Intent
 import android.os.Build
-import android.util.Log
 import com.awawa.neverlate.db.DatabaseHelper
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.utils.AlarmReceiver
 import com.awawa.neverlate.utils.EXTRA_REPEAT
+import com.awawa.neverlate.utils.EXTRA_TIME_ID
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
-import java.util.*
 
 
 class TimesPresenter(private val view: TimesFragment) {
@@ -81,11 +81,25 @@ class TimesPresenter(private val view: TimesFragment) {
 
 
     fun removeNotification(timeId: Int) {
+        GlobalScope.launch {
+            val database = DatabaseHelper.getDatabase(view.requireContext())
 
+            val alarmManager = (view.requireContext().getSystemService(ALARM_SERVICE)) as AlarmManager
+
+            val alarmIntent = Intent(view.requireContext(), AlarmReceiver::class.java)
+                .let {
+                    PendingIntent.getBroadcast(view.requireContext(), timeId, it, 0)
+                }
+
+            alarmManager.cancel(alarmIntent)
+
+            database.notificationsDao().deleteByTimeId(timeId)
+        }
     }
 
 
     fun setNotification(timeId: Int,
+                        transportId: Int,
                         time: Long,
                         delta: Int,
                         daily: Boolean,
@@ -99,6 +113,7 @@ class TimesPresenter(private val view: TimesFragment) {
                 val routeRecord = database.routesDao().getRoute(stopRecord.routeId)!!
                 val newNotification = Entities.Notifications(
                     timeId,
+                    transportId,
                     routeRecord.routeNumber,
                     stopRecord.stopName,
                     time,
@@ -110,21 +125,23 @@ class TimesPresenter(private val view: TimesFragment) {
                 notification.time = time
                 notification.delta = delta
                 notification.repeat = daily
+                database.notificationsDao().updateNotification(notification)
             }
-            scheduleNotification(view.requireContext(), time, daily)
+            scheduleNotification(view.requireContext(), timeId, time, daily)
         }
     }
 
 
-    fun scheduleNotification(context: Context, time: Long, repeat: Boolean) {
+    private fun scheduleNotification(context: Context, timeId: Int, time: Long, repeat: Boolean) {
         val alarmIntent = Intent(context, AlarmReceiver::class.java)
             .putExtra(EXTRA_REPEAT, repeat)
+            .putExtra(EXTRA_TIME_ID, timeId)
             .let {
-            PendingIntent.getBroadcast(context, 0, it, 0)
+            PendingIntent.getBroadcast(context, timeId, it, 0)
         }
 
         val alarmManager = (
-                context.getSystemService(Context.ALARM_SERVICE) as AlarmManager
+                context.getSystemService(ALARM_SERVICE) as AlarmManager
                 )
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {

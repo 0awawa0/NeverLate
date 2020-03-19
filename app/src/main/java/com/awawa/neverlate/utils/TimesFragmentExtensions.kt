@@ -69,7 +69,7 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
 
     val notification = presenter.getNotification(time._id)
 
-    view.npTime.setOnValueChangedListener() { _, _, newVal ->  run {
+    view.npTime.setOnValueChangedListener { _, _, newVal ->  run {
         val last = newVal.toString()[newVal.toString().lastIndex]
         if (last == '1' && newVal != 11) {
             view.tvMinutes.text = getString(R.string.dialog_notify_time_minutes_1)
@@ -83,10 +83,18 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
             }
         }
     }}
-    view.cbNotify.isChecked = notification != null
-    view.npTime.value = notification?.delta ?: 10
+
     view.npTime.maxValue = 60
     view.npTime.minValue = 0
+
+    if (notification != null) {
+        view.cbNotify.isChecked = true
+        view.cbDaily.isChecked = notification.repeat
+        view.npTime.value = notification.delta
+    } else {
+        view.cbNotify.isChecked = false
+        view.npTime.value = 10
+    }
 
     AlertDialog.Builder(requireContext())
         .setView(view)
@@ -108,6 +116,7 @@ fun TimesFragment.showNotifyTimeDialog(time: Entities.Times) {
             if (view.cbNotify.isChecked) {
                 presenter.setNotification(
                     time._id,
+                    transportId,
                     dueDate.timeInMillis,
                     view.npTime.value,
                     view.cbDaily.isChecked,

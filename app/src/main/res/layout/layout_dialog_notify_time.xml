@@ -30,7 +30,7 @@
         android:id="@+id/cbDaily"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text=""/>
+        android:text="@string/daily"/>
 
 
 </LinearLayout>

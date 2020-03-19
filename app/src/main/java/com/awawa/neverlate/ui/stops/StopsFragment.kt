@@ -65,7 +65,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
 
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        loadingPanel.visibility = View.VISIBLE
+        (requireActivity() as MainActivity).showLoadingPanel()
         presenter.getStops(routeId + p0!!.parent!!.selectedTabPosition)
     }
 
@@ -77,6 +77,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
         val args = Bundle()
         args.putInt(ARGUMENT_STOP_ID, view.id)
         args.putInt(ARGUMENT_TRANSPORT_ID, transportId)
+        (requireActivity() as MainActivity).showLoadingPanel()
         (requireActivity() as MainActivity).navController.navigate(R.id.nav_times, args)
     }
 
@@ -105,7 +106,7 @@ class StopsFragment : Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLi
     suspend fun updateData(stops: List<Entities.Stops>) {
         withContext(Dispatchers.Main) {
             adapter.updateStops(stops)
-            loadingPanel.visibility = View.GONE
+            (requireActivity() as MainActivity).hideLoadingPanel()
             if (stops.isEmpty()) tvStopsError.visibility = View.VISIBLE
             else tvStopsError.visibility = View.GONE
         }

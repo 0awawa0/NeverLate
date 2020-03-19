@@ -21,6 +21,12 @@ val migration1_2 = object: Migration(1, 2) {
     }
 }
 
+val migration2_3 = object: Migration(2, 3) {
+    override fun migrate(database: SupportSQLiteDatabase) {
+        database.execSQL("ALTER TABLE notifications ADD COLUMN TransportID INTEGER NOT NULL DEFAULT 0")
+    }
+}
+
 @Database(
     entities = [
         Entities.Routes::class,
@@ -29,7 +35,7 @@ val migration1_2 = object: Migration(1, 2) {
         Entities.Notifications::class
     ],
     exportSchema = false,
-    version = 2
+    version = 3
 )
 abstract class Database : RoomDatabase() {
     abstract fun routesDao() : Daos.RouteDao

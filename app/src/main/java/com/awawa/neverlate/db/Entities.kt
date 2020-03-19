@@ -44,6 +44,7 @@ class Entities {
     @Entity(tableName = "notifications")
     data class Notifications(
         @ColumnInfo(name = "TimeId") var timeId: Int = 0,
+        @ColumnInfo(name = "TransportID") var transportId: Int = 0,
         @ColumnInfo(name = "RouteNumber") var routeNumber: String = "",
         @ColumnInfo(name = "StopName") var stopName: String = "",
         @ColumnInfo(name = "Time") var time: Long = 0,

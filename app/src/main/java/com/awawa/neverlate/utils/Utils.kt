@@ -45,7 +45,7 @@ fun toast(context: Context, text: String, duration: Int) {
 }
 
 
-fun showNotification(context: Context) {
+fun showNotification(context: Context, message: String) {
     createNotificationChannel(context)
 
     val notificationIntent = Intent(context, MainActivity::class.java)
@@ -56,8 +56,11 @@ fun showNotification(context: Context) {
         0
     )
     val notification = NotificationCompat.Builder(context, NOTIFICATION_CHANNEL_ID)
-        .setContentText(context.getString(R.string.notification_message))
+        .setContentTitle(context.getString(R.string.notification_message))
+        .setContentText(message)
         .setSmallIcon(R.drawable.ic_notification)
+        .setStyle(NotificationCompat.BigTextStyle()
+            .bigText(message))
         .setContentIntent(pendingIntent)
         .setCategory(NotificationCompat.CATEGORY_ALARM)
         .setBadgeIconType(NotificationCompat.BADGE_ICON_NONE)

@@ -6,6 +6,9 @@ import android.content.pm.PackageManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View.GONE
+import android.view.View.VISIBLE
+import androidx.appcompat.app.AlertDialog
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -24,6 +27,7 @@ import com.awawa.neverlate.db.TRANSPORT_ID_TROLLEY
 import com.awawa.neverlate.utils.isMarshmallowOrHigher
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.app_bar_main.*
+import kotlinx.android.synthetic.main.content_main.*
 
 
 val transportIdToColorMap = mapOf(
@@ -91,6 +95,8 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
     ) {
 
         if (destination.id in destinationToColorMap.keys) {
+
+            loadingPanel.visibility = VISIBLE
             if (isMarshmallowOrHigher()) {
                 bottom_nav_view.itemIconTintList = resources.getColorStateList(
                     destinationToColorMap.getValue(destination.id), theme
@@ -136,6 +142,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
             }
         }
     }
+
+    fun showLoadingPanel() { loadingPanel.visibility = VISIBLE }
+
+    fun hideLoadingPanel() { loadingPanel.visibility = GONE }
 
 
     interface MenuItemSelectCallback {

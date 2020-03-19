@@ -4,7 +4,8 @@ package com.awawa.neverlate.ui.routes
 import android.graphics.Point
 import android.os.Bundle
 import android.view.*
-import android.view.View.GONE
+import android.view.View.*
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -40,6 +41,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         rvRoutes.layoutManager = PreCachedLayoutManager(requireContext(), size.y)
         rvRoutes.setHasFixedSize(true)
         rvRoutes.adapter = adapter
+        rvRoutes.visibility = INVISIBLE
         presenter.getRoutes(transportId)
 
         (requireActivity() as MainActivity).registerMenuItemSelectCallback(object : MainActivity.MenuItemSelectCallback {
@@ -54,7 +56,8 @@ class RoutesFragment : Fragment(), RVItemClickListener {
     suspend fun updateData(routes: List<Entities.Routes>) {
         withContext(Dispatchers.Main) {
             adapter.updateRoutes(routes)
-            loadingPanel.visibility = GONE
+            (activity as MainActivity).hideLoadingPanel()
+            rvRoutes.visibility = VISIBLE
         }
     }
 
@@ -62,6 +65,7 @@ class RoutesFragment : Fragment(), RVItemClickListener {
         val args = Bundle()
         args.putInt(ARGUMENT_ROUTE_ID, view.id)
         args.putInt(ARGUMENT_TRANSPORT_ID, transportId)
+        (requireActivity() as MainActivity).showLoadingPanel()
         ((requireActivity() as MainActivity).navController).navigate(R.id.nav_stops, args)
     }
 

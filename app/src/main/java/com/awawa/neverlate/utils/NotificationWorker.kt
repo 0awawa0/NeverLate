@@ -15,7 +15,7 @@ class NotificationWorker(private val context: Context, params: WorkerParameters)
     : Worker(context, params) {
 
     override fun doWork(): Result {
-        showNotification(context)
+        showNotification(context, "")
         return Result.success()
     }
 }

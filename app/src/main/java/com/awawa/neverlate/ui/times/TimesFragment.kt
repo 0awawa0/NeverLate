@@ -43,7 +43,9 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+
         root = inflater.inflate(R.layout.fragment_times, container, false)
+
         val size = Point()
         requireActivity().windowManager.defaultDisplay.getSize(size)
         root.rvTimes.layoutManager = GridLayoutManager(context, 4)
@@ -66,7 +68,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
 
 
     override fun onTabSelected(p0: TabLayout.Tab?) {
-        loadingPanel.visibility = VISIBLE
+        (requireActivity() as MainActivity).showLoadingPanel()
         presenter.getTimeTable(stopId, p0!!.parent!!.selectedTabPosition == 1)
     }
 
@@ -128,7 +130,7 @@ class TimesFragment: Fragment(), TabLayout.OnTabSelectedListener, RVItemClickLis
     suspend fun updateTimeTable(times: List<Entities.Times>) {
         withContext(Dispatchers.Main) {
             adapter.updateTimeTable(times)
-            loadingPanel.visibility = GONE
+            (requireActivity() as MainActivity).hideLoadingPanel()
             if (times.isEmpty()) tvTimesError.visibility = VISIBLE
             else tvTimesError.visibility = GONE
         }

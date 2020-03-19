@@ -94,6 +94,9 @@ class Daos {
         @Insert
         fun addNotification(notification: Entities.Notifications)
 
+        @Update
+        fun updateNotification(notification: Entities.Notifications)
+
         @Delete
         fun deleteNotification(notification: Entities.Notifications)
     }

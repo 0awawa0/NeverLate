@@ -51,7 +51,7 @@ class DatabaseHelper() {
         if (!::database.isInitialized){
             database = Room.databaseBuilder(context, Database::class.java, databaseName)
                 .allowMainThreadQueries()
-                .addMigrations(migration1_2)
+                .addMigrations(migration1_2, migration2_3)
                 .createFromAsset(assetDatabaseFile)
                 .build()
         }
