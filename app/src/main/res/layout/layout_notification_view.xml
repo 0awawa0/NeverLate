@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TableLayout android:rowCount="2"
+    android:columnCount="5"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?android:selectableItemBackground"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TableRow>
+        <TextView
+            android:id="@+id/tvTimeTitle"
+            android:layout_column="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Время"/>
+
+        <TextView
+            android:id="@+id/tvDeltaTitle"
+            android:layout_column="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Напомнить за, м"/>
+
+        <TextView
+            android:id="@+id/tvRouteNumberTitle"
+            android:layout_column="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Номер маршрута"/>
+
+        <TextView
+            android:id="@+id/tvStopNameTitle"
+            android:layout_column="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:padding="10dp"
+            android:text="Остановка"/>
+
+        <TextView
+            android:id="@+id/cbRepeatTitle"
+            android:layout_column="4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:padding="10dp"
+            android:text="Ежедневно"/>
+    </TableRow>
+    <TableRow>
+        <TextView
+            android:id="@+id/tvTime"
+            android:layout_column="0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tvDelta"
+            android:layout_column="1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textColor="@android:color/black"
+            android:layout_gravity="center"
+            android:text="0"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tvRouteNumber"
+            android:layout_column="2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:textColor="@android:color/black"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tvStopName"
+            android:layout_column="3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:textAlignment="center"
+            android:layout_gravity="center"
+            android:padding="10dp"/>
+
+        <TextView
+            android:id="@+id/tvRepeat"
+            android:layout_column="4"
+            android:layout_gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textSize="16sp"
+            android:textColor="@android:color/black"
+            android:padding="10dp"/>
+    </TableRow>
+
+    <Button
+        android:id="@+id/btCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Отменить"/>
+
+</TableLayout>

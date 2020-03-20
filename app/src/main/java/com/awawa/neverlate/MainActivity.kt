@@ -126,6 +126,10 @@ class MainActivity : AppCompatActivity(R.layout.activity_main),
                 return menuItemSelectCallback!!.onItemSelected(item)
             return false
         }
+        if (item.itemId == R.id.settings) {
+            navController.navigate(R.id.nav_settings)
+            return true
+        }
         return super.onOptionsItemSelected(item)
     }
 

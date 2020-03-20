@@ -73,4 +73,7 @@
     <string name="notification_message">Пора выходить!</string>
     <string name="set_notify">Установлено</string>
     <string name="daily">Ежедневно</string>
+
+    <string name="notifications">Уведомления</string>
+    <string name="delete_all_notifications">Отменить все уведомления</string>
 </resources>

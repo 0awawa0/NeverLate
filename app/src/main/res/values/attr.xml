@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="SettingItemView">
+        <attr name="setting_title" format="reference|string"/>
+        <attr name="setting_value" format="reference|string"/>
+    </declare-styleable>
+    
+    <declare-styleable name="NotificationView">
+        <attr name="time" format="string"/>
+        <attr name="delta" format="integer"/>
+        <attr name="routeNumber" format="string"/>
+        <attr name="stopName" format="string"/>
+        <attr name="repeat" format="boolean"/>
+    </declare-styleable>
+</resources>

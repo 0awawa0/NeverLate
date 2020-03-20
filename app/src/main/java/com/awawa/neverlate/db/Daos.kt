@@ -85,6 +85,9 @@ class Daos {
     @Dao
     interface NotificationsDao {
 
+        @Query("SELECT * FROM notifications")
+        fun getAllNotifications() : List<Entities.Notifications>
+
         @Query("SELECT * FROM notifications WHERE timeId == :timeId")
         fun getByTimeId(timeId: Int): Entities.Notifications?
 
