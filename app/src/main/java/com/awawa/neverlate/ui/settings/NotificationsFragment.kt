@@ -1,5 +1,6 @@
 package com.awawa.neverlate.ui.settings
 
+
 import android.graphics.Point
 import android.os.Bundle
 import android.util.Log
@@ -41,6 +42,11 @@ class NotificationsFragment : Fragment(), RVItemClickListener {
         return root
     }
 
+    suspend fun notificationDeleted(timeId: Int) {
+        withContext(Dispatchers.Main) {
+            adapter.deleteNotification(timeId)
+        }
+    }
 
     suspend fun updateNotificationsList(notifications: List<Entities.Notifications>) {
         withContext(Dispatchers.Main) {
@@ -50,7 +56,7 @@ class NotificationsFragment : Fragment(), RVItemClickListener {
     }
 
     override fun onClick(view: View) {
-        toast(requireContext(), "Click", Toast.LENGTH_SHORT)
+        presenter.deleteNotification(view.id)
     }
 
     override fun onCreateContextMenu(

@@ -1,14 +1,12 @@
 package com.awawa.neverlate.ui.settings
 
-import android.view.View
+
 import android.view.ViewGroup
-import android.widget.AbsListView
-import android.widget.ExpandableListView
 import androidx.recyclerview.widget.RecyclerView
 import com.awawa.neverlate.RVItemClickListener
 import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.ui.custom_views.NotificationView
-import kotlinx.android.synthetic.main.layout_notification_view.view.*
+import com.awawa.neverlate.utils.timeStampToTime
 
 
 class NotificationsAdapter(private val clickListener: RVItemClickListener)
@@ -22,6 +20,15 @@ class NotificationsAdapter(private val clickListener: RVItemClickListener)
         notifyDataSetChanged()
     }
 
+    fun deleteNotification(id: Int) {
+        for (i in dataSet.indices)
+            if (dataSet[i].timeId == id) {
+                dataSet.removeAt(i)
+                notifyItemRemoved(i)
+                break
+            }
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NotificationsViewHolder {
         val view = NotificationView(parent.context)
         view.layoutParams = ViewGroup.LayoutParams(
@@ -33,11 +40,13 @@ class NotificationsAdapter(private val clickListener: RVItemClickListener)
 
     override fun onBindViewHolder(holder: NotificationsViewHolder, position: Int) {
         holder.view.id = dataSet[position].timeId
-        holder.view.time = dataSet[position].time.toString()
+        holder.view.transportId = dataSet[position].transportId
+        holder.view.time = timeStampToTime(dataSet[position].time)
         holder.view.delta = dataSet[position].delta
         holder.view.routeNumber = dataSet[position].routeNumber
         holder.view.stopName = dataSet[position].stopName
         holder.view.repeat = dataSet[position].repeat
+        holder.view.btCancel.id = dataSet[position].timeId
     }
 
     override fun getItemCount(): Int { return dataSet.size }

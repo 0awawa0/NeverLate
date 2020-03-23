@@ -12,6 +12,7 @@ import com.awawa.neverlate.db.Entities
 import com.awawa.neverlate.utils.AlarmReceiver
 import com.awawa.neverlate.utils.EXTRA_REPEAT
 import com.awawa.neverlate.utils.EXTRA_TIME_ID
+import com.awawa.neverlate.utils.cancelNotification
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
@@ -82,18 +83,7 @@ class TimesPresenter(private val view: TimesFragment) {
 
     fun removeNotification(timeId: Int) {
         GlobalScope.launch {
-            val database = DatabaseHelper.getDatabase(view.requireContext())
-
-            val alarmManager = (view.requireContext().getSystemService(ALARM_SERVICE)) as AlarmManager
-
-            val alarmIntent = Intent(view.requireContext(), AlarmReceiver::class.java)
-                .let {
-                    PendingIntent.getBroadcast(view.requireContext(), timeId, it, 0)
-                }
-
-            alarmManager.cancel(alarmIntent)
-
-            database.notificationsDao().deleteByTimeId(timeId)
+            cancelNotification(view.requireContext(), timeId)
         }
     }
 

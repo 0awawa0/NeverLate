@@ -1,13 +1,17 @@
 package com.awawa.neverlate.ui.custom_views
 
 import android.content.Context
+import android.content.res.ColorStateList
+import android.graphics.drawable.ColorStateListDrawable
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.widget.Button
-import android.widget.HorizontalScrollView
-import android.widget.TableLayout
-import android.widget.TextView
+import android.widget.*
+import androidx.core.content.ContextCompat
 import com.awawa.neverlate.R
+import com.awawa.neverlate.db.TRANSPORT_ID_BUS
+import com.awawa.neverlate.db.TRANSPORT_ID_MARSH
+import com.awawa.neverlate.db.TRANSPORT_ID_TRAM
+import com.awawa.neverlate.db.TRANSPORT_ID_TROLLEY
 
 
 class NotificationView : HorizontalScrollView {
@@ -16,15 +20,39 @@ class NotificationView : HorizontalScrollView {
         R.layout.layout_notification_view,
         this,
         false
-    ) as TableLayout
+    ) as GridLayout
 
     private val tvTime: TextView = view.findViewById(R.id.tvTime)
     private val tvDelta: TextView = view.findViewById(R.id.tvDelta)
     private val tvRouteNumber: TextView = view.findViewById(R.id.tvRouteNumber)
     private val tvStopName: TextView = view.findViewById(R.id.tvStopName)
     private val tvRepeat: TextView = view.findViewById(R.id.tvRepeat)
+    private val imgTransport: ImageView = view.findViewById(R.id.imgTransport)
     val btCancel: Button = view.findViewById(R.id.btCancel)
 
+    var transportId: Int
+        set(value) {
+            field = value
+
+            when(field) {
+                TRANSPORT_ID_TRAM -> {
+                    imgTransport.setImageDrawable(context.getDrawable(R.drawable.menu_item_tram))
+                    imgTransport.imageTintList = ContextCompat.getColorStateList(context, R.color.colorTram)
+                }
+                TRANSPORT_ID_TROLLEY -> {
+                    imgTransport.setImageDrawable(context.getDrawable(R.drawable.trolley_menu_item))
+                    imgTransport.imageTintList = ContextCompat.getColorStateList(context, R.color.colorTrolley)
+                }
+                TRANSPORT_ID_BUS -> {
+                    imgTransport.setImageDrawable(context.getDrawable(R.drawable.menu_item_bus))
+                    imgTransport.imageTintList = ContextCompat.getColorStateList(context, R.color.colorBus)
+                }
+                TRANSPORT_ID_MARSH -> {
+                    imgTransport.setImageDrawable(context.getDrawable(R.drawable.menu_item_marsh))
+                    imgTransport.imageTintList = ContextCompat.getColorStateList(context, R.color.colorMarsh)
+                }
+            }
+        }
     var time: String = tvTime.text.toString()
         set(value) {
             field = value
@@ -58,6 +86,7 @@ class NotificationView : HorizontalScrollView {
 
     constructor(context: Context): super(context) {
         addView(view)
+        transportId = id
     }
 
     constructor(context: Context, attrs: AttributeSet?): super(context, attrs) {
@@ -77,5 +106,6 @@ class NotificationView : HorizontalScrollView {
             a.recycle()
         }
         addView(view)
+        transportId = id
     }
 }
